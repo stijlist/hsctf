@@ -11,7 +11,7 @@ class Guestbook
     @comments = []
   end
   def markdownify(string)
-    `echo #{string} | ./Markdown.pl`
+    `./Markdown.pl <<< #{string}`
   end
 
   def comment(name, string)
