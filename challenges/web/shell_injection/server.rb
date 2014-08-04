@@ -39,7 +39,7 @@ __END__
 @@ layout
 <html>
     <head>
-        <title>My Wedding Guestbook</title>
+        <title>My Hackathon Guestbook</title>
     </head>
     <body>
         <%= yield %>
@@ -47,7 +47,7 @@ __END__
 </html>
 
 @@ index
-<h1>My Wedding Guestbook</h1>
+<h1>My Hackathon Guestbook</h1>
 I'm getting married. Leave a message about how much you love me!
 <form action='/guestbook/comments' method='POST'>
     <label>Name: </label>
