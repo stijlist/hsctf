@@ -4,6 +4,7 @@
 # -> backtick to a markdown parser
 require 'date'
 require 'sinatra'
+require 'cgi'
 
 class Guestbook
   attr_accessor :comments
@@ -11,6 +12,7 @@ class Guestbook
     @comments = []
   end
   def markdownify(string)
+    string = filter_bad_chars(string)
     `./Markdown.pl <<< #{string}`
   end
 
@@ -18,6 +20,11 @@ class Guestbook
     comments << {name: name, comment: markdownify(string), timestamp: DateTime.now}
   end
 
+  def filter_bad_chars(string)
+    # Get rid of semi-colons, quotes, and ampersands so they can't hack us
+    string.gsub(/[;"&]/,"")
+  end
+  
 end
 
 guestbook = Guestbook.new
