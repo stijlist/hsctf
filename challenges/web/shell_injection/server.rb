@@ -44,8 +44,8 @@ __END__
 </html>
 
 @@ index
-<h1>My Hackathon Guestbook</h1>
-I'm getting married. Leave a message about how much you love me!
+<h1>Hacker Schmool Guestbook</h1>
+What do you think of Hacker Schmool?
 <form action='/guestbook/comments' method='POST'>
     <label>Name: </label>
     <input type='text' name='name'>
