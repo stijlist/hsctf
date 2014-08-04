@@ -4,7 +4,6 @@
 # -> backtick to a markdown parser
 require 'date'
 require 'sinatra'
-require 'pry'
 
 class Guestbook
   attr_accessor :comments
@@ -12,12 +11,11 @@ class Guestbook
     @comments = []
   end
   def markdownify(string)
-    `./markdown.sh #{string}`
+    `echo #{string} | ./Markdown.pl`
   end
 
   def comment(name, string)
-    # comments << {user: name, comment: markdownify(string), timestamp: DateTime.now}
-    comments << {name: name, comment: string, timestamp: DateTime.now}
+    comments << {name: name, comment: markdownify(string), timestamp: DateTime.now}
   end
 
 end
@@ -25,7 +23,6 @@ end
 guestbook = Guestbook.new
 
 get '/' do
-  binding.pry
   erb :index, {locals: {comments: guestbook.comments}}
 end
 
@@ -60,6 +57,5 @@ I'm getting married. Leave a message about how much you love me!
 <% comments.each do |comment| %>
   <div>
    <p>Name: <%= comment[:name] %></p>
-   <p>Time: <%= comment[:timestamp] %> </p>
-   <p><%= comment[:comment] %>
+   <p><%= comment[:comment] %> Time: <%= comment[:timestamp] %> 
 <% end %>
