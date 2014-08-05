@@ -4,7 +4,6 @@
 # -> backtick to a markdown parser
 require 'date'
 require 'sinatra'
-require 'pry'
 
 class Guestbook
   attr_accessor :comments
@@ -12,20 +11,24 @@ class Guestbook
     @comments = []
   end
   def markdownify(string)
-    `./markdown.sh #{string}`
+    string = filter_bad_chars(string)
+    `./Markdown.pl <<< #{string}`
   end
 
   def comment(name, string)
-    # comments << {user: name, comment: markdownify(string), timestamp: DateTime.now}
-    comments << {name: name, comment: string, timestamp: DateTime.now}
+    comments << {name: name, comment: markdownify(string), timestamp: DateTime.now}
   end
 
+  def filter_bad_chars(string)
+    # Get rid of semi-colons, quotes, and ampersands so they can't hack us
+    string.gsub(/[;"&]/,"")
+  end
+  
 end
 
 guestbook = Guestbook.new
 
 get '/' do
-  binding.pry
   erb :index, {locals: {comments: guestbook.comments}}
 end
 
@@ -47,8 +50,8 @@ __END__
 </html>
 
 @@ index
-<h1>My Hackathon Guestbook</h1>
-I'm getting married. Leave a message about how much you love me!
+<h1>Hacker Schmool Guestbook</h1>
+What do you think of Hacker Schmool?
 <form action='/guestbook/comments' method='POST'>
     <label>Name: </label>
     <input type='text' name='name'>
@@ -60,6 +63,5 @@ I'm getting married. Leave a message about how much you love me!
 <% comments.each do |comment| %>
   <div>
    <p>Name: <%= comment[:name] %></p>
-   <p>Time: <%= comment[:timestamp] %> </p>
-   <p><%= comment[:comment] %>
+   <p><%= comment[:comment] %> Time: <%= comment[:timestamp] %> 
 <% end %>
