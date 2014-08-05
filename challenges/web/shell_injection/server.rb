@@ -4,7 +4,6 @@
 # -> backtick to a markdown parser
 require 'date'
 require 'sinatra'
-require 'cgi'
 
 class Guestbook
   attr_accessor :comments
