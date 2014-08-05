@@ -50,7 +50,7 @@ __END__
 </html>
 
 @@ index
-<h1>Hacker School Guestbook</h1>
+<h1>Hacker Schmool Guestbook</h1>
 What do you think of Hacker Schmool?
 <form action='/guestbook/comments' method='POST'>
     <label>Name: </label>
