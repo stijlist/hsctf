@@ -37,6 +37,8 @@ describe Game do
 end
 
 describe Player do
+  before(:each) { @challenge = Challenge.new('../alpha.yaml') }
+
   it 'knows what game it\'s playing' do
     game = Game.new(@challenge)
     player = game.add_player('bert')
@@ -46,7 +48,13 @@ describe Player do
   it 'starts on the first challenge' do
     game = Game.new(@challenge)
     player = game.add_player('bert')
-    expect(player.current_challenge).to eq(game.root)
+    expect(player.current_challenges).to eq(game.root)
   end
 
+  it 'can submit an answer for the challenge it\'s on' do
+    game = Game.new(@challenge)
+    player = game.add_player('bert')
+    player.submit_answer('nevergraduate!')
+    expect( player.current_challenges ).not_to eq(@challenge)
+  end
 end

@@ -14,7 +14,19 @@ require 'pry'
 # zulip.send_message 'urgent message', 'started', ctf_stream
 
 # the zulip bot builds up a graph of the game tree 
-Player = Struct.new(:name, :game, :current_challenge)
+class Player 
+  attr_accessor :name, :game, :current_challenges
+  def initialize(name, game, current_challenges)
+    @name = name
+    @game = game 
+    @current_challenges = current_challenges
+  end
+  
+  def submit_answer(answer)
+    @current_challenges = @current_challenges.submit_answer(answer)
+  end
+end
+
 class Game
   attr_accessor :players, :root
   def initialize(root_challenge)
@@ -38,6 +50,10 @@ class Challenge
 
   def child_paths
     self.data.fetch('children').map {|challenge| "#{challenge}.yaml" }
+  end
+
+  def submit_answer(answer)
+    (@data.fetch('password') == answer) ? child_paths : self
   end
 
   def parse_yaml(relative_path)
