@@ -14,6 +14,20 @@ require 'pry'
 # zulip.send_message 'urgent message', 'started', ctf_stream
 
 # the zulip bot builds up a graph of the game tree 
+Player = Struct.new(:name, :game, :current_challenge)
+class Game
+  attr_accessor :players, :root
+  def initialize(root_challenge)
+    @root = root_challenge
+    @players = []
+  end
+
+  def add_player(name)
+    player = Player.new(name, self, @root)
+    @players << player
+    player
+  end
+end
 
 class Challenge
   attr_accessor :data
