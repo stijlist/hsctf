@@ -22,9 +22,6 @@ class Player
     @current_challenges = current_challenges
   end
   
-  def submit_answer(answer)
-    @current_challenges = @current_challenges.submit_answer(answer)
-  end
 end
 
 class Game
@@ -42,21 +39,30 @@ class Game
 end
 
 class Challenge
-  attr_accessor :data
+  attr_accessor :data, :password
 
   def initialize(yaml_filename)
     @data = parse_yaml(yaml_filename)
+    @password = @data['password']
+  end
+
+  def children
+    child_paths.map{|path| Challenge.new(path) }
   end
 
   def child_paths
     self.data.fetch('children').map {|challenge| "#{challenge}.yaml" }
   end
 
-  def submit_answer(answer)
-    (@data.fetch('password') == answer) ? child_paths : self
+  def submit_password(password)
+    (@data.fetch('password') == password) ? children : self
   end
 
   def parse_yaml(relative_path)
     YAML::load(File.open(File.join(File.dirname(__FILE__), relative_path)))
+  end
+
+  def ==(other)
+    @data == other.data
   end
 end

@@ -1,3 +1,3 @@
 #!/bin/bash
 
-rspec
+rspec --color
