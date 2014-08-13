@@ -30,6 +30,9 @@ class Game
   end
 
   def get_children(challenge)
+    unless challenge.is_a? Hash
+      challenge = all_challenges.detect{|c| c['name'] == challenge}
+    end
     get_child_paths(challenge).map do |c| 
       load_challenge(c)
     end
