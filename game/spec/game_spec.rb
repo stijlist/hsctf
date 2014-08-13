@@ -31,17 +31,15 @@ describe Game do
 
   it 'updates scores for a player when a player solves a challenge' do
     game.submit_answer(max, first_challenge, 'nevergraduate!')
-    expect(max.fetch('score')).not_to be_zero
+    expect(max.fetch('score')).to eq(first_challenge['points'])
   end
 
   it 'knows which challenges are currently active without duplicates' do
-    max # need to evaluate max to avoid rspec let laziness
     game.register('bert', 'bert@somethingdoneright.net')
     expect(game.active_challenges).to eq([first_challenge])
   end
 
   it 'knows about all challenges accessible from root challenges' do
-
     all_challenges_expected = [first_challenge,
                                game.load_challenge('lovelace1.yaml'),
                                game.load_challenge('mccarthy1.yaml')]
