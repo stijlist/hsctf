@@ -1,21 +1,23 @@
 class Game
-  def initialize(root)
-
+  attr_reader :players
+  def initialize(path)
+    @players = []
+    @root = Challenge.new(path)
+    
   end
 
   def register(player)
-
+    @players << player
   end
 
   def has_player?(player)
-    true
+    @players.include?(player)
   end
 end
-class Player
-  def initialize(name, email)
-      
-  end
-end
-class Challenge
 
+class Challenge
+  def initialize(path)
+    @data = YAML.load(path)
+    @
+  end
 end
