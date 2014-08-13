@@ -13,7 +13,7 @@ class Game
 
   # this tells us what docker instances need to be spun up
   def active_challenges
-    @players.map {|p| p['available_challenges'] }.uniq
+    @players.flat_map {|p| p['available_challenges'] }.uniq
   end
   
   def register(player_name, player_email)
@@ -51,7 +51,7 @@ class Game
 
   def submit_answer(player, challenge, answer)
     if challenge.fetch('password') == answer
-      player['score'] += 1 # should scores be a constant? should they vary per challenge?
+      player['score'] += challenge['points'] # should scores be a constant? should they vary per challenge?
       # remove the challenge from player.available_challenges, replace with its
       # children
       player['available_challenges'].map! do |c|
@@ -59,4 +59,17 @@ class Game
       end.flatten!
     end
   end
+
+  def all_challenges
+    @root_challenges.map {|c| all_children(c) }.flatten.uniq
+  end
+
+  def all_children(challenge)
+    # probably suboptimal lolol
+    get_children(challenge).reduce([challenge]) do |acc, c| 
+      acc << c 
+      acc << all_children(c) 
+    end.flatten
+  end
+
 end

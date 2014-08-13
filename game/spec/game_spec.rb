@@ -20,6 +20,12 @@ describe Game do
     expect(max['score']).to eq(0)
   end
 
+  it 'knows a challenge\'s children' do
+    next_challenges = [game.load_challenge('lovelace1.yaml'), 
+                       game.load_challenge('mccarthy1.yaml')]
+    expect(game.get_children(first_challenge)).to eq(next_challenges)
+  end
+
   it 'updates challenges for a player when that player solves a challenge' do
     game.submit_answer(max, first_challenge, 'nevergraduate!')
     next_challenges = game.get_children(first_challenge)
@@ -29,6 +35,20 @@ describe Game do
   it 'updates scores for a player when a player solves a challenge' do
     game.submit_answer(max, first_challenge, 'nevergraduate!')
     expect(max.fetch('score')).not_to be_zero
+  end
+
+  it 'knows which challenges are currently active without duplicates' do
+    max # need to evaluate max to avoid rspec let laziness
+    game.register('bert', 'bert@somethingdoneright.net')
+    expect(game.active_challenges).to eq([first_challenge])
+  end
+
+  it 'knows about all challenges accessible from root challenges' do
+
+    all_challenges_expected = [first_challenge,
+                               game.load_challenge('lovelace1.yaml'),
+                               game.load_challenge('mccarthy1.yaml')]
+    expect(game.all_challenges).to eq(all_challenges_expected)
   end
 
 end
