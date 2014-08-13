@@ -51,6 +51,7 @@ class Game
 
   def submit_answer(player, challenge, answer)
     if challenge.fetch('password') == answer
+      player['score'] += 1 # should scores be a constant? should they vary per challenge?
       # remove the challenge from player.available_challenges, replace with its
       # children
       player['available_challenges'].map! do |c|

@@ -25,4 +25,10 @@ describe Game do
     next_challenges = game.get_children(first_challenge)
     expect(max.fetch('available_challenges')).to eq(next_challenges)
   end
+
+  it 'updates scores for a player when a player solves a challenge' do
+    game.submit_answer(max, first_challenge, 'nevergraduate!')
+    expect(max.fetch('score')).not_to be_zero
+  end
+
 end
