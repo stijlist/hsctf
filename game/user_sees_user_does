@@ -1,0 +1,35 @@
+sees: announcement 
+---
+does: pm hsctf to register
+---
+sees: hsctf pms user welcome
+
+at game start time => hsctf messages stream 'game started!'
+
+hsctf pm user instructions 
+---
+does: pm hsctf 'solved <challenge name> <challenge sol'n>'
+---
+sees: congratulations, new score, available challenges
+
+sees: leader on stream
+
+does: pm hsctf score
+---
+sees: score
+
+does: pm hsctf 'challenges'
+---
+sees: available challenges
+
+does: pm hsctf 'show me <challenge name>'
+---
+sees: <challenge name>, if challenge is available or solved
+
+does: pm hsctf 'help'
+---
+sees: help text
+
+does: pm hsctf <anything else>
+---
+sees: 'i didn't catch that'

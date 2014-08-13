@@ -1,0 +1,14 @@
+---
+name: lovelace1
+text: >-
+  One of our field operatives, codenamed Lovelace, has managed to
+  plant a bug on a Hacker Schmool router. She's managed to exfiltrate
+  some network traffic from Hacker Schmool, but we need your help
+  analyzing it.
+
+  We're looking for the password to Hacker Schmool's main FTP
+  server. You can find the files our operative has updaloaded here:
+  %{url}.
+
+password: KbNJnrEJ6u4b5hQy
+children: []

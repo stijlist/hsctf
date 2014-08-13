@@ -1,0 +1,32 @@
+---
+name: alpha
+text: >-
+  Hello %{name},
+
+  Congradulations on your new role as Hacker School Brand Defender.
+  We're very excited to have you on the team! As the newest member of
+  the Intellectual Property Protection Team, your role will be to
+  idenfity and liquidate any instances of brand dilution you come across.
+
+  You can communicate with us, your superiors, through Zulip. Send a
+  message to me, `@HSCTF` with one of the following commands:
+
+  You can
+  1. `help` - see a help screen
+  2. `score` - view your score
+  3. `solve <LEVEL NAME> <PASSWORD>`
+
+  You advance levels by finding a password. Each level has a
+  name. This level is called **alpha**. To continue on your quest, you
+  need to find the password for this level. I've encrypted the
+  password with a super-secure-cipher. The encrypted password is
+  `ariretenqhngr!` Can you find the plaintext?
+
+  Never Graduate,
+  Hacker School Brand Protection Bot
+
+password: nevergraduate!
+points: 100
+children: [lovelace1, mccarthy1]
+  
+  
