@@ -17,9 +17,11 @@ class Game
   end
   
   def register(player_name, player_email)
-    @players << { 'name' => player_name, 'email' => player_email,
+    player = { 'name' => player_name, 'email' => player_email,
                   'available_challenges' => @root_challenges.dup,
                   'score' => 0 }
+    @players << player
+    player
   end
 
   def add_root_challenge(challenge_path)

@@ -2,10 +2,7 @@ require_relative '../game.rb'
 
 describe Game do
   let(:game) { Game.new.add_root_challenge('alpha.yaml') }
-  let(:max) {
-    game.register('max', 'maxim@ontoillogical.net')
-    game.find_player_by('name' => 'max')
-  }
+  let(:max) { game.register('max', 'maxim@ontoillogical.net') }
   let(:first_challenge) { game.root_challenges.first }
 
   it 'reads challenge objects from the data dir correctly' do
