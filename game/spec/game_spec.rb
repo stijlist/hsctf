@@ -23,18 +23,22 @@ describe Game do
     expect(game.get_children(first_challenge)).to eq(next_challenges)
   end
 
+  it 'knows if a challenge is available for a given player' do
+    expect(game.available_for_player?(max, first_challenge)).to be_truthy
+  end
+
   it 'updates challenges for a player when that player solves a challenge' do
-    game.submit_answer(max, first_challenge, 'nevergraduate!')
+    game.submit_answer!(max, first_challenge['name'], 'nevergraduate!')
     next_challenges = game.get_children(first_challenge)
     expect(max.fetch('available_challenges')).to eq(next_challenges)
   end
 
   it 'knows when a player has solved a challenge' do
-    expect(game.submit_answer(max, first_challenge, 'nevergraduate!')).to be_truthy
+    expect(game.submit_answer!(max, first_challenge['name'], 'nevergraduate!')).to be_truthy
   end
 
   it 'updates scores for a player when a player solves a challenge' do
-    game.submit_answer(max, first_challenge, 'nevergraduate!')
+    game.submit_answer!(max, first_challenge['name'], 'nevergraduate!')
     expect(max.fetch('score')).to eq(first_challenge['points'])
   end
 

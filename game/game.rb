@@ -45,24 +45,26 @@ class Game
     end
   end
 
+  def available_for_player?(player, challenge)
+    player['available_challenges']
+  end
+
   # we could obviate this method by being explicit about the filenames
   # in each challenge yaml file
   def get_child_paths(challenge)
     challenge.fetch('children').map {|challenge_name| "#{challenge_name}.yaml" }
   end
 
-  def submit_answer(player, challenge, answer)
-    if challenge.fetch('password') == answer
-      player['score'] += challenge['points'] # should scores be a constant? should they vary per challenge?
-      # remove the challenge from player.available_challenges, replace with its
-      # children
-      player['available_challenges'].map! do |c|
-        c == challenge ? get_children(c) : challenge
-      end.flatten!
-      true
-    else
-      false
+  # returns a conditional re: success & updates player's available challenges
+  def submit_answer!(player, challenge_name, answer)
+    challenge = player['available_challenges'].detect {|c| c['name'] == challenge_name }
+    if challenge and challenge['password'] == answer
+      player['available_challenges'].delete(challenge)
+      player['available_challenges'].concat(get_children(challenge))
+      player['score'] += challenge['points']
+      return true
     end
+    false
   end
 
   def all_challenges
