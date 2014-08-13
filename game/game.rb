@@ -59,6 +59,9 @@ class Game
       player['available_challenges'].map! do |c|
         c == challenge ? get_children(c) : challenge
       end.flatten!
+      true
+    else
+      false
     end
   end
 

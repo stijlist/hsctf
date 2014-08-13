@@ -29,6 +29,10 @@ describe Game do
     expect(max.fetch('available_challenges')).to eq(next_challenges)
   end
 
+  it 'knows when a player has solved a challenge' do
+    expect(game.submit_answer(max, first_challenge, 'nevergraduate!')).to be_truthy
+  end
+
   it 'updates scores for a player when a player solves a challenge' do
     game.submit_answer(max, first_challenge, 'nevergraduate!')
     expect(max.fetch('score')).to eq(first_challenge['points'])
@@ -45,5 +49,4 @@ describe Game do
                                game.load_challenge('mccarthy1.yaml')]
     expect(game.all_challenges).to eq(all_challenges_expected)
   end
-
 end
