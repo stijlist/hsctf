@@ -18,8 +18,8 @@ class Game
   
   def register(player_name, player_email)
     player = { 'name' => player_name, 'email' => player_email,
-                  'available_challenges' => @root_challenges.dup,
-                  'score' => 0 }
+               'available_challenges' => @root_challenges.dup,
+               'score' => 0 }
     @players << player
     player
   end
