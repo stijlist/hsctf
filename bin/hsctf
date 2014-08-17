@@ -1,4 +1,11 @@
 #!/usr/bin/env ruby
+require 'dante'
 $LOAD_PATH.unshift("#{File.dirname(__FILE__)}/../lib")
+TMP_PATH  = "#{File.dirname(__FILE__)}/../tmp"
+LOG_PATH  = "#{File.dirname(__FILE__)}/../logs"
 require 'hsctf'
-CTF.new
+opts = { pid_path: "#{TMP_PATH}/hsctf.pid",
+         log_path: "#{LOG_PATH}/hsctf.log"}
+Dante.run('hsctf', opts) do |opts|
+  run CTF.new
+end
