@@ -82,4 +82,8 @@ class Game
     end.flatten
   end
 
+  def score_for(player)
+    player["score"]
+  end
+
 end

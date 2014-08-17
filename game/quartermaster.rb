@@ -22,14 +22,14 @@ class Quartermaster
       end
     else
       case text.split.first
-      when 'solved'
+      when /solved?/
         challenge_name = text.split[1]
         if @game.available_for_player?(player, challenge_name)
           password = text.split[2]
           if @game.submit_answer!(player, challenge_name, password)
             send_message(player, "Excellent.")
             @game.get_children(challenge_name).each do |c|
-              send_challenge_description(challenge, player)
+              send_challenge_description(c, player)
             end
             send_message(player, "Your score is #{@game.score_for(player)}")
             #TODO: update leaderboard, act accordingly
@@ -74,7 +74,12 @@ class Quartermaster
 
   def send_challenge_description(challenge, player)
     send_message(player, "**#{challenge['name']}**")
-    send_message(player, challenge['text'])
+    if challenge['exec']
+      interpolated_values = eval(challenge['exec'])
+    else
+      interpolated_values = {}
+    end
+    send_message(player, challenge['text'] % interpolated_values)
   end
 
 end

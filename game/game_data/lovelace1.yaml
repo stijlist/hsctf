@@ -12,3 +12,5 @@ text: >-
 
 password: KbNJnrEJ6u4b5hQy
 children: []
+exec: >-
+  {url: "http://google.com"}
