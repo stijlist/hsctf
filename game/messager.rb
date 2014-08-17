@@ -1,3 +1,6 @@
+require 'zulip'
+require_relative 'game.rb'
+
 class Messager
   def initialize
     @client = Zulip::Client.new do |config|
@@ -6,7 +9,7 @@ class Messager
     end
   end
 
-  def listen(callback)
+  def listen(&callback)
     @client.stream_messages do |message|
       callback.call(message)
     end

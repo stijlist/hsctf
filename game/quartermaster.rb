@@ -1,3 +1,4 @@
+require 'pry'
 class Quartermaster
   attr_reader :game
   def initialize(game, messager)
@@ -6,18 +7,19 @@ class Quartermaster
   end
 
   def send_message(player, message)
-    @messager.send_message(message, player)
+    @messager.send_message(player, message)
   end
 
   def receive_pm(name, email, text)
+    binding.pry
     text.downcase!
     player = @game.find_player_by('email' => email)
     unless player
       if text.start_with?('register')
-        @game.register(name, email)
+        player = @game.register(name, email)
         send_message(player, "You've successfully registered!")
       else
-        send_message(player, "You haven't signed up! Send me a pm with 'register' to sign up.")
+        send_message({"email" => email}, "You haven't signed up! Send me a pm with 'register' to sign up.")
       end
     else
       case text.split.first
