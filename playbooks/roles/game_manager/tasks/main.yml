@@ -8,6 +8,9 @@
     - ruby2.1
     - ruby2.1-dev
 
+- name: Install bundler
+  command: gem install bundler
+
 - name: Create deploy user
   user: name=deploy shell=/bin/bash
 

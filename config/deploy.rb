@@ -16,6 +16,8 @@ set :ssh_options, { forward_agent: true }
 set :deploy_via, :remote_cache
 set :user, "deploy"
 
+set :bundle_bins, fetch(:bundle_bins, []).push("bin/create_db")
+
 
 # Default value for :scm is :git
 # set :scm, :git
@@ -63,6 +65,14 @@ namespace :deploy do
       # within release_path do
       #   execute :rake, 'cache:clear'
       # end
+    end
+  end
+end
+namespace :db do
+  desc 'Create Database'
+  task :create do
+    on roles(:app) do
+      execute "cd #{current_path} && bundle exec ./bin/create_db"
     end
   end
 end
