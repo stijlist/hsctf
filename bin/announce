@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+$LOAD_PATH.unshift("#{File.dirname(__FILE__)}/../lib")
+require 'hsctf'
+
+if !ARGV[0]
+  puts 'Usage: announce MESSAGE'
+  exit 
+end
+
+message = ARGV[0]
+m = Messager.new
+m.broadcast_message('hsctf', 'Announcements', message)

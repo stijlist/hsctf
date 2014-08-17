@@ -73,6 +73,7 @@ namespace :deploy do
 
   after :deploy, "deploy:restart"
 end
+
 namespace :db do
   desc 'Create Database'
   task :create do
@@ -81,6 +82,29 @@ namespace :db do
     end
   end
 end
+
+namespace :message do
+  desc 'Announcement'
+  task :announce, :message do |t, args|
+    on roles(:app) do
+      within current_path do
+        execute *%W[bundle exec bin/announce "#{args[:message]}"]
+      end
+    end
+  end
+end
+
+namespace :message do
+  desc 'Private Message'
+  task :pm, :email, :message do |t, args|
+    on roles(:app) do
+      within current_path do
+        execute *%W[bundle exec bin/announce "#{args[:email]}" "#{args[:message]}"]
+      end
+    end
+  end
+end
+ 
 
 
 
