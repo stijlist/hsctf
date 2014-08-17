@@ -11,7 +11,6 @@ class Quartermaster
   end
 
   def receive_pm(name, email, text)
-    text.downcase!
     player = @game.find_player_by('email' => email)
     unless player
       if text.start_with?('register')
@@ -21,18 +20,33 @@ class Quartermaster
         send_message({"email" => email}, "You haven't signed up! Send me a pm with 'register' to sign up.")
       end
     else
-      case text.split.first
+      case text.split.first.downcase
       when /solved?/
         challenge_name = text.split[1]
         if @game.available_for_player?(player, challenge_name)
           password = text.split[2]
           if @game.submit_answer!(player, challenge_name, password)
-            send_message(player, "Excellent.")
-            @game.get_children(challenge_name).each do |c|
-              send_challenge_description(c, player)
-            end
+            send_message(player, "Excellent, you've completed this mission")
             send_message(player, "Your score is #{@game.score_for(player)}")
-            #TODO: update leaderboard, act accordingly
+            new_challenges =  @game.get_children(challenge_name)
+            if new_challenges && !new_challenges.empty?
+              if new_challenges.length > 1
+                send_message(player, "You have unlocked #{new_challenges.length} new missions")
+              else
+                send_message(player, "You have unlocked a new mission")
+              end
+              new_challenges.each do |c|
+                send_challenge_description(c, player)
+              end
+            else
+              if player['available_challenges'].empty?
+                send_message(player, "Congratulations, you've finished the Hacker School CTF")
+                #TODO alert stream that player is done
+              end
+            end
+            
+          #TODO handle winning
+          #TODO: update leaderboard, act accordingly
           else
             send_message(player,
                          "That didn't work. Try again, time is of the essence!")

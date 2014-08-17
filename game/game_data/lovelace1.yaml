@@ -10,6 +10,7 @@ text: >-
   server. You can find the files our operative has updaloaded here:
   %{url}.
 
+points: 100
 password: KbNJnrEJ6u4b5hQy
 children: []
 exec: >-

@@ -9,6 +9,7 @@ class Game
   def initialize
     @players = []
     @root_challenges = []
+    #TODO load all challenges, validate data
   end
 
   # this tells us what docker instances need to be spun up
@@ -67,6 +68,7 @@ class Game
       player['score'] += challenge['points']
       return true
     end
+    puts answer, challenge.inspect
     false
   end
 
