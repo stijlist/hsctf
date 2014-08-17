@@ -100,7 +100,7 @@ namespace :message do
   task :pm, :email, :message do |t, args|
     on roles(:app) do
       within current_path do
-        execute *%W[bundle exec bin/announce "#{args[:email]}" "#{args[:message]}"]
+        execute *%W[bundle exec bin/message "#{args[:email]}" "#{args[:message]}"]
       end
     end
   end
