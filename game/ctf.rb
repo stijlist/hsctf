@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 require_relative 'messager.rb'
 require_relative 'quartermaster.rb'
 class CTF
