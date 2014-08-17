@@ -14,5 +14,3 @@ class CTF
     end
   end
 end
-
-CTF.new

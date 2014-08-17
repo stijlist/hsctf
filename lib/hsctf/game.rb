@@ -2,8 +2,8 @@ require 'yaml'
 require 'sequel'
 
 class Game
-  DATA_DIR = 'game_data/'
-  DB_PATH = 'db/game_database.db'
+  DATA_DIR = "#{File.dirname(__FILE__)}/../../assets/game_data/"
+  DB_PATH = "#{File.dirname(__FILE__)}/../../db/game_database.db"
   # challenges and players are both just data (dictionaries)
   # players keep references to their challenges
   # challenges know which challenges are their children
