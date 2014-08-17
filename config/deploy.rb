@@ -32,7 +32,7 @@ set :bundle_bins, fetch(:bundle_bins, []).push("./bin/create_db")
 # set :pty, true
 
 # Default value for :linked_files is []
-set :linked_files, %w{db/game_database.db logs/hsctf.log}
+set :linked_files, %w{db/game_database.db logs/hsctf.log config/env.yml}
 # set :linked_files, %w{config/database.yml}
 
 # Default value for linked_dirs is []
@@ -49,7 +49,7 @@ namespace :deploy do
   task :start do 
     on roles(:app) do
       within current_path do
-        execute "./bin/hsctf -d"
+        execute *%w[bundle exec bin/hsctf -d]
       end
     end
   end
@@ -58,14 +58,14 @@ namespace :deploy do
   task :stop do
     on roles(:app) do
       within current_path do
-        execute "bundle exec ./bin/hsctf -d -k"
+        execute *%w[bundle exec bin/hsctf -d -k]
       end
     end
   end
   
   desc 'Restarting application'
   task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
+    on roles(:app), in: :sequence do
       invoke("deploy:stop")
       invoke("deploy:start")
     end

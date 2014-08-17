@@ -1,6 +1,11 @@
 #!/usr/bin/env ruby
 require 'dante'
 $LOAD_PATH.unshift("#{File.dirname(__FILE__)}/../lib")
+env_file = File.join(File.dirname(__FILE__), '../config', 'env.yml')
+YAML.load(File.open(env_file)).each do |key, value|
+  ENV[key.to_s] = value
+end if File.exists?(env_file)
+
 TMP_PATH  = "#{File.dirname(__FILE__)}/../tmp"
 LOG_PATH  = "#{File.dirname(__FILE__)}/../logs"
 require 'hsctf'
