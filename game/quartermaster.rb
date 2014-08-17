@@ -11,7 +11,6 @@ class Quartermaster
   end
 
   def receive_pm(name, email, text)
-    binding.pry
     text.downcase!
     player = @game.find_player_by('email' => email)
     unless player
