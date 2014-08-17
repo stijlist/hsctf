@@ -14,7 +14,8 @@ class Quartermaster
     player = @game.find_player_by(email: email)
     unless player
       if text.start_with?('register')
-        player = @game.register(name, email)
+        player_id = @game.register(name, email)
+        player = @game.find_player_by(id: player_id)
         send_message(player, "You've successfully registered!")
       else
         send_message({email: email}, "You haven't signed up! Send me a pm with 'register' to sign up.")
@@ -40,7 +41,8 @@ class Quartermaster
                 send_challenge_description(c, player)
               end
             else
-              if player[:available_challenges].empty?
+              #todo uglyness
+              if YAML.load(game.find_player_by(id: player[:id])[:available_challenges]).empty?
                 send_message(player, "Congratulations, you've finished the Hacker School CTF")
                 #TODO alert stream that player is done
               end
@@ -64,11 +66,8 @@ class Quartermaster
         end
       when 'show'
         challenge_name = text.split[1]
-        challenge = available_challenges.detect do |c|
-          c['name'] = challenge_name
-        end
-        if challenge
-          send_challenge_description(challenge, player)
+        if available_challenges.include? challenge_name
+          send_challenge_description(challenge_name, player)
         end
       when 'help'
         helptext = <<-EOS
@@ -88,6 +87,9 @@ EOS
   end
 
   def send_challenge_description(challenge, player)
+    unless challenge.is_a? Hash
+      challenge = game.challenges[challenge]
+    end
     send_message(player, "**#{challenge['name']}**")
     if challenge['exec']
       interpolated_values = eval(challenge['exec'])
