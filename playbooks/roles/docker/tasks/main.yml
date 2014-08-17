@@ -6,10 +6,9 @@
     repo: 'deb http://get.docker.io/ubuntu docker main'
     update_cache: yes
 
-- name: Install Docker
-  apt: pkg=lxc-docker
-  notify: "Start Docker"
-
 - name: Updates apt cache
   apt: update_cache=true
 
+- name: Install Docker
+  apt: pkg=lxc-docker
+  notify: "Start Docker"
