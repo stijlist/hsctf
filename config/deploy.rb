@@ -16,7 +16,7 @@ set :ssh_options, { forward_agent: true }
 set :deploy_via, :remote_cache
 set :user, "deploy"
 
-set :bundle_bins, fetch(:bundle_bins, []).push("bin/create_db")
+set :bundle_bins, fetch(:bundle_bins, []).push("./bin/create_db")
 
 
 # Default value for :scm is :git
@@ -32,7 +32,7 @@ set :bundle_bins, fetch(:bundle_bins, []).push("bin/create_db")
 # set :pty, true
 
 # Default value for :linked_files is []
-set :linked_files, %w{db/game_database.db}
+set :linked_files, %w{db/game_database.db logs/hsctf.log}
 # set :linked_files, %w{config/database.yml}
 
 # Default value for linked_dirs is []
@@ -44,29 +44,34 @@ set :linked_files, %w{db/game_database.db}
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
-before "deploy", "linked_files:touch" 
-
 namespace :deploy do
+  desc 'Starting application'
+  task :start do 
+    on roles(:app) do
+      within current_path do
+        execute "./bin/hsctf -d"
+      end
+    end
+  end
+ 
+  desc 'Stoppining application'
+  task :stop do
+    on roles(:app) do
+      within current_path do
+        execute "bundle exec ./bin/hsctf -d -k"
+      end
+    end
+  end
   
-  desc 'Restart application'
+  desc 'Restarting application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
-      
-      # Your restart mechanism here, for example:
-      # execute :touch, release_path.join('tmp/restart.txt')
+      invoke("deploy:stop")
+      invoke("deploy:start")
     end
   end
 
-  after :publishing, :restart
-
-  after :restart, :clear_cache do
-    on roles(:web), in: :groups, limit: 3, wait: 10 do
-      # Here we can do anything such as:
-      # within release_path do
-      #   execute :rake, 'cache:clear'
-      # end
-    end
-  end
+  after :deploy, "deploy:restart"
 end
 namespace :db do
   desc 'Create Database'
@@ -76,3 +81,6 @@ namespace :db do
     end
   end
 end
+
+
+
