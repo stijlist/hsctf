@@ -10,3 +10,6 @@ gem 'sequel'
 
 gem 'pry'
 gem 'pry-byebug'
+gem 'capistrano'
+gem 'capistrano-touch-linked-files'
+gem 'dante'

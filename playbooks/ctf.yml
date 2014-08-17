@@ -1,0 +1,8 @@
+---
+- hosts: ctf
+  remote_user: ubuntu
+  sudo: yes
+  
+  roles:
+    - docker
+    - game_manager
