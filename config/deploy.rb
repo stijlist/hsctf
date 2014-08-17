@@ -32,10 +32,11 @@ set :bundle_bins, fetch(:bundle_bins, []).push("./bin/create_db")
 # set :pty, true
 
 # Default value for :linked_files is []
-set :linked_files, %w{db/game_database.db logs/hsctf.log config/env.yml}
+set :linked_files, %w{db/game_database.db config/env.yml}
 # set :linked_files, %w{config/database.yml}
 
 # Default value for linked_dirs is []
+set :linked_dirs, %w{logs, tmp}
 # set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
 # Default value for default_env is {}
