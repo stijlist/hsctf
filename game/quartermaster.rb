@@ -11,15 +11,16 @@ class Quartermaster
   end
 
   def receive_pm(name, email, text)
-    player = @game.find_player_by('email' => email)
+    player = @game.find_player_by(email: email)
     unless player
       if text.start_with?('register')
         player = @game.register(name, email)
         send_message(player, "You've successfully registered!")
       else
-        send_message({"email" => email}, "You haven't signed up! Send me a pm with 'register' to sign up.")
+        send_message({email: email}, "You haven't signed up! Send me a pm with 'register' to sign up.")
       end
     else
+      available_challenges = YAML.load(player[:available_challenges])
       case text.split.first.downcase
       when /solved?/
         challenge_name = text.split[1]
@@ -39,7 +40,7 @@ class Quartermaster
                 send_challenge_description(c, player)
               end
             else
-              if player['available_challenges'].empty?
+              if player[:available_challenges].empty?
                 send_message(player, "Congratulations, you've finished the Hacker School CTF")
                 #TODO alert stream that player is done
               end
@@ -58,12 +59,12 @@ class Quartermaster
       when 'score'
         send_message(player, "Your score is #{@game.score_for(player)}")
       when 'challenges'
-        player['available_challenges'].each do |c|
+        available_challenges.each do |c|
           send_challenge_description(c, player)
         end
       when 'show'
         challenge_name = text.split[1]
-        challenge = player['available_challenges'].detect do |c|
+        challenge = available_challenges.detect do |c|
           c['name'] = challenge_name
         end
         if challenge
@@ -71,13 +72,13 @@ class Quartermaster
         end
       when 'help'
         helptext = <<-EOS
-          You can
-          1. `help` - see a help screen
-          2. `score` - view your score
-          3. `solve <LEVEL NAME> <PASSWORD>`
-          4. `challenges` - message you all available challenges
-          5. `show <CHALLENGE>` - pm you the description of <CHALLENGE>
-        EOS
+You can
+1. `help` - see a help screen
+2. `score` - view your score
+3. `solve <LEVEL NAME> <PASSWORD>`
+4. `challenges` - message you all available challenges
+5. `show <CHALLENGE>` - pm you the description of <CHALLENGE>
+EOS
 
         send_message(player, helptext)
       else

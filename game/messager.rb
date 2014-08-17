@@ -17,7 +17,7 @@ class Messager
 
   # takes a hash of player attributes and sends them a private message
   def send_message(player, message)
-    @client.send_private_message(message, player['email'])
+    @client.send_private_message(message, player[:email])
   end
 
   def broadcast_message(stream, subject, message)

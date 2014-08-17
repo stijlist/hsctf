@@ -5,6 +5,8 @@ gem 'cucumber'
 gem 'rspec'
 gem 'zulip'
 gem 'guard'
+gem 'sqlite3'
+gem 'sequel'
 
 gem 'pry'
 gem 'pry-byebug'

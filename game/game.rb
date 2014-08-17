@@ -1,27 +1,32 @@
 require 'yaml'
+require 'sequel'
 
 class Game
   DATA_DIR = 'game_data/'
+  DB_PATH = 'db/game_database.db'
   # challenges and players are both just data (dictionaries)
   # players keep references to their challenges
   # challenges know which challenges are their children
   attr_accessor :players, :root_challenges
   def initialize
-    @players = []
+    @DB = Sequel.sqlite(DB_PATH)
+    @players = @DB[:players]
     @root_challenges = []
+   
     #TODO load all challenges, validate data
   end
 
   # this tells us what docker instances need to be spun up
   def active_challenges
-    @players.flat_map {|p| p['available_challenges'] }.uniq
+    @players.all.flat_map { |p| p[:available_challenges].from_yaml }.uniq
   end
   
   def register(player_name, player_email)
-    player = { 'name' => player_name, 'email' => player_email,
-               'available_challenges' => @root_challenges.dup,
-               'score' => 0 }
-    @players << player
+    player = { name: player_name, email: player_email,
+               available_challenges: @root_challenges.dup.to_yaml,
+               score: 0}
+    player_id = @players.insert(player)
+    
     player
   end
 
@@ -44,13 +49,12 @@ class Game
   end
 
   def find_player_by(attributes)
-    @players.detect do |p| 
-      attributes.keys.all? {|k| p[k] == attributes[k] }
-    end
+    @players.where(attributes).first
   end
 
   def available_for_player?(player, challenge)
-    player['available_challenges']
+    challenges = YAML.load(player[:available_challenges]).map{|c| c['name']}
+    challenges.include? challenge
   end
 
   # we could obviate this method by being explicit about the filenames
@@ -61,11 +65,12 @@ class Game
 
   # returns a conditional re: success & updates player's available challenges
   def submit_answer!(player, challenge_name, answer)
-    challenge = player['available_challenges'].detect {|c| c['name'] == challenge_name }
+    available_challenges =  YAML.load(player[:available_challenges])
+    challenge = available_challenges.detect {|c| c['name'] == challenge_name }
     if challenge and challenge['password'] == answer
-      player['available_challenges'].delete(challenge)
-      player['available_challenges'].concat(get_children(challenge))
-      player['score'] += challenge['points']
+      available_challenges.delete(challenge)
+      available_challenges.concat(get_children(challenge))
+      @players.where(id: player[:id]).update(available_challenges: available_challenges.to_yaml, score: player[:score] + challenge['points'])
       return true
     end
     puts answer, challenge.inspect
@@ -85,7 +90,7 @@ class Game
   end
 
   def score_for(player)
-    player["score"]
+    find_player_by(id: player[:id])[:score]
   end
 
 end
