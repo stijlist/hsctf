@@ -1,5 +1,6 @@
+#!/usr/bin/env ruby
 require 'sequel'
-DB = Sequel.sqlite('game_database.db')
+DB = Sequel.sqlite("#{File.dirname(__FILE__)}/../db/game_database.db")
 DB.create_table :players do
   primary_key :id
   String :name
