@@ -12,8 +12,10 @@ class Quartermaster
   end
 
   def receive_pm(name, email, text)
+    # check that player exists already in-game
     player = @game.find_player_by(email: email)
     unless player
+      # check that unregistered players are trying to register
       if text.start_with?('register')
         player_id = @game.register(name, email)
         player = @game.find_player_by(id: player_id)
@@ -52,13 +54,15 @@ class Quartermaster
             #TODO: update leaderboard, act accordingly
             if @leaders != @game.leaders
               @leaders = @game.leaders
-              @messager.broadcast_message('hsctf', 'Current Leaders', "Currently leading: #{@leaders.join(',').chomp(',')}")
+              @messager.broadcast_message('hsctf', 'Current Leaders', "Currently leading: #{@leaders.map{|l| l[:name]}.join(',').chomp(',')}")
             end
 
+          # if password is incorrect
           else
             send_message(player,
                          "That didn't work. Try again, time is of the essence!")
           end
+        # if challenge is not in player's list of challenges
         else
           send_message(player,
                        "I don't know about that challenge yet. Do you have access to it?")
