@@ -15,3 +15,9 @@ password: KbNJnrEJ6u4b5hQy
 children: []
 exec: >-
   {url: "http://google.com"}
+
+singleton_dockerfile: |
+  FROM debian:unstable
+  EXPOSE 21
+  RUN apt-get update && apt-get install -y vsftpd
+  ENV HOME /opt/files/

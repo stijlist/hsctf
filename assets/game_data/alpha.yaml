@@ -1,6 +1,6 @@
 ---
 name: alpha
-text: >-
+text: |
   Hello %{name},
 
   Congradulations on your new role as Hacker School Brand Defender.
@@ -27,6 +27,6 @@ text: >-
 
 password: nevergraduate!
 points: 100
-children: [lovelace1, mccarthy1]
+children: [lovelace1, mccarthy1, ritchie1]
 exec: >-
   {name: player["name"]}
