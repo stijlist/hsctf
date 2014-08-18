@@ -22,6 +22,10 @@ class Game
     #TODO validate data
   end
 
+  def leader
+    Leaders.for(@players)
+  end
+
   def register(player_name, player_email)
     player = { name: player_name, email: player_email,
                available_challenges: [@root_challenge].to_yaml,
@@ -71,4 +75,12 @@ class Game
     find_player_by(id: player[:id])[:score]
   end
 
+end
+
+class Leaders
+  def self.for(players)
+    sorted_by_score = players.sort_by{|p| p['score']}.reverse
+    highest_score = sorted_by_score.first['score']
+    sorted_by_score.take_while {|p| p['score'] == highest_score }
+  end
 end
