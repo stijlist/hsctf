@@ -22,8 +22,8 @@ class Game
     #TODO validate data
   end
 
-  def leader
-    Leaders.for(@players)
+  def leaders
+    Leaders.given(@players)
   end
 
   def register(player_name, player_email)
@@ -78,7 +78,7 @@ class Game
 end
 
 class Leaders
-  def self.for(players)
+  def self.given(players)
     sorted_by_score = players.sort_by{|p| p['score']}.reverse
     highest_score = sorted_by_score.first['score']
     sorted_by_score.take_while {|p| p['score'] == highest_score }

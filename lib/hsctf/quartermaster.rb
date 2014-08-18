@@ -4,6 +4,7 @@ class Quartermaster
   def initialize(game, messager)
     @game = game
     @messager = messager
+    @leaders = []
   end
 
   def send_message(player, message)
@@ -48,8 +49,12 @@ class Quartermaster
               end
             end
             
-          #TODO handle winning
-          #TODO: update leaderboard, act accordingly
+            #TODO: update leaderboard, act accordingly
+            if @leaders != @game.leaders
+              @leaders = @game.leaders
+              @messager.broadcast_message('hsctf', 'Current Leaders', "Currently leading: #{@leaders.join(',').chomp(',')}")
+            end
+
           else
             send_message(player,
                          "That didn't work. Try again, time is of the essence!")
