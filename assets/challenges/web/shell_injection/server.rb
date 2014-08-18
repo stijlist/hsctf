@@ -5,6 +5,9 @@
 require 'date'
 require 'sinatra'
 
+set :bind, '0.0.0.0'
+
+
 class Guestbook
   attr_accessor :comments
   def initialize
