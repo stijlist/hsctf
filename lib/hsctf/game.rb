@@ -42,11 +42,12 @@ class Game
   end
 
   def find_player_by(attributes)
-    @players.where(attributes).first
+    player = @players.where(attributes).first
+    player.merge(available_challenges: YAML.load(player[:available_challenges])) if player
   end
 
   def available_for_player?(player, challenge)
-    challenges = YAML.load(player[:available_challenges])
+    challenges = player[:available_challenges]
     challenges.include? challenge
   end
 
@@ -58,7 +59,7 @@ class Game
 
   # returns a conditional re: success & updates player's available challenges
   def submit_answer!(player, challenge_name, answer)
-    available_challenges =  YAML.load(player[:available_challenges])
+    available_challenges =  player[:available_challenges]
     if available_challenges.include? challenge_name
       challenge = @challenges[challenge_name]
       if challenge and challenge['password'] == answer

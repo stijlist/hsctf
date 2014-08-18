@@ -24,12 +24,16 @@ class Quartermaster
         send_message({email: email}, "You haven't signed up! Send me a pm with 'register' to sign up.")
       end
     else
-      available_challenges = YAML.load(player[:available_challenges])
+      # find player's available challenges
+      available_challenges = player[:available_challenges]
       case text.split.first.downcase
       when /solved?/
+        # if user is trying to solve something 
         challenge_name = text.split[1]
+        # if challenge is available for a player
         if @game.available_for_player?(player, challenge_name)
           password = text.split[2]
+          # if password is correct
           if @game.submit_answer!(player, challenge_name, password)
             send_message(player, "Excellent, you've completed this mission")
             send_message(player, "Your score is #{@game.score_for(player)}")
@@ -45,7 +49,7 @@ class Quartermaster
               end
             else
               #todo uglyness
-              if YAML.load(game.find_player_by(id: player[:id])[:available_challenges]).empty?
+              if (game.find_player_by(id: player[:id])[:available_challenges]).empty?
                 send_message(player, "Congratulations, you've finished the Hacker School CTF")
                 #TODO alert stream that player is done
               end
