@@ -1,6 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    archive-tar-minitar (0.5.2)
     builder (3.2.2)
     byebug (2.7.0)
       columnize (~> 0.3)
@@ -28,6 +29,11 @@ GEM
     dante (0.2.0)
     debugger-linecache (1.2.0)
     diff-lcs (1.2.5)
+    docker-api (1.13.2)
+      archive-tar-minitar
+      excon (>= 0.38.0)
+      json
+    excon (0.39.5)
     faraday (0.8.9)
       multipart-post (~> 1.2.0)
     ffi (1.9.3)
@@ -41,6 +47,7 @@ GEM
       pry (>= 0.9.12)
       thor (>= 0.18.1)
     i18n (0.6.11)
+    json (1.8.1)
     listen (2.7.9)
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
@@ -97,6 +104,7 @@ DEPENDENCIES
   capistrano-touch-linked-files
   cucumber
   dante
+  docker-api
   guard
   pry
   pry-byebug

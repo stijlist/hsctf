@@ -27,6 +27,6 @@ text: |
 
 password: nevergraduate!
 points: 100
-children: [lovelace1, mccarthy1]
+children: [lovelace1, mccarthy1, ritchie1]
 exec: >-
   {name: player["name"]}
