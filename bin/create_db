@@ -10,7 +10,8 @@ DB.create_table :players do
 end
 
 DB.create_table :challenge_ports do
-  primary_key :player_id
-  String :challenge
+  primary_key :id
+  Integer :player_id
+  String :challenge_name
   String :port
 end

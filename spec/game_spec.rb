@@ -1,7 +1,10 @@
 require_relative '../lib/hsctf/game.rb'
 
 describe Game do
-  let(:game) { Game.new }
+  let(:manager) do 
+    double(spawn_instances: [['alpha1', '2375'], ['mccarthy1', '2375'], ['lovelace1', '2375']]) 
+  end
+  let(:game) { Game.new(manager) }
   let(:max_id) { game.register('max', 'maxim@ontoillogical.net') }
   let(:max) { game.find_player_by(id: max_id ) }
   let(:first_challenge) { game.root_challenge }

@@ -1,7 +1,7 @@
 ---
 name: alpha
 text: |
-  Our operative TODOTODOTOD
+  Our operative TODOTODOTOD. the service is forsure listening on ctf.hackerschool.com, port %{port}
 
 password: aach5Aemigijepek
 points: 100
@@ -21,3 +21,5 @@ user_docker: |
   USER user
 
   CMD ["/opt/hackerschool/serve"]
+exec: >-
+  {port: port}

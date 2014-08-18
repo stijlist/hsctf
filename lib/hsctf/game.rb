@@ -38,6 +38,10 @@ class Game
     end
     player_id
   end
+
+  def find_challenge_port(player, challenge_name)
+    @challenge_ports.where(player_id: player[:id], challenge_name: challenge_name).first[:port]
+  end
  
   def get_children(challenge)
     unless challenge.is_a? Hash
