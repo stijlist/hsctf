@@ -8,3 +8,9 @@ DB.create_table :players do
   String :available_challenges
   Integer :score
 end
+
+DB.create_table :challenge_ports do
+  primary_key :player_id
+  String :challenge
+  String :port
+end

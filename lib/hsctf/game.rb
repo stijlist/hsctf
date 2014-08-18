@@ -9,9 +9,11 @@ class Game
   # players keep references to their challenges
   # challenges know which challenges are their children
   attr_accessor :players, :challenges, :root_challenge
-  def initialize
+  def initialize(docker_manager)
+    @manager = docker_manager
     @DB = Sequel.sqlite(DB_PATH)
     @players = @DB[:players]
+    @challenge_ports = @DB[:challenge_ports]
     challenge_info = YAML.load_file(File.join(DATA_DIR, "challenges.yaml"))
     @root_challenge = challenge_info['root']
     @challenges = {}
@@ -31,6 +33,9 @@ class Game
                available_challenges: [@root_challenge].to_yaml,
                score: 0}
     player_id = @players.insert(player)
+    @manager.spawn_instances(@challenges).each do |challenge_name, port|
+      @challenge_ports.insert(challenge: challenge_name, port: port, player_id: player_id)
+    end
     player_id
   end
  
