@@ -1,6 +1,6 @@
 ---
 name: alpha
-text: >-
+text: |
   Hello %{name},
 
   Congradulations on your new role as Hacker School Brand Defender.
