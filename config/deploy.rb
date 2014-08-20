@@ -1,7 +1,7 @@
 
 # config valid only for Capistrano 3.1
 lock '3.2.1'
-
+DATA_DIR = File.join(File.dirname(__FILE__), "../assets/game_data/")
 set :application, 'hsctf'
 set :repo_url, 'git@github.com:stijlist/hsctf.git'
 
@@ -54,7 +54,7 @@ namespace :deploy do
       end
     end
   end
- 
+  
   desc 'Stoppining application'
   task :stop do
     on roles(:app) do
@@ -84,6 +84,23 @@ namespace :db do
   end
 end
 
+namespace :docker do
+  desc 'Build instances'
+  task :build do
+    on roles(:app) do
+      within current_path do
+        challenge_paths = YAML.load_file(File.join(DATA_DIR, "challenges.yaml"))["challenges"]
+        challenge_paths.each do |path|
+          challenge = YAML.load_file(File.join(DATA_DIR, path))
+          if challenge["docker_dir"]
+            execute %W[docker build -t "#{chalenge["name"]}" "#{File.join(DATA_DIR, challenge["docker_dir"])}"]
+          end 
+        end
+        
+      end
+    end
+  end
+end
 namespace :message do
   desc 'Announcement'
   task :announce, :message do |t, args|
@@ -93,9 +110,7 @@ namespace :message do
       end
     end
   end
-end
-
-namespace :message do
+  
   desc 'Private Message'
   task :pm, :email, :message do |t, args|
     on roles(:app) do
@@ -105,7 +120,7 @@ namespace :message do
     end
   end
 end
- 
+
 
 
 
