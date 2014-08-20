@@ -1,4 +1,3 @@
-
 # config valid only for Capistrano 3.1
 lock '3.2.1'
 DATA_DIR = File.join(File.dirname(__FILE__), "../assets/game_data/")
@@ -90,10 +89,11 @@ namespace :docker do
     on roles(:app) do
       within current_path do
         challenge_paths = YAML.load_file(File.join(DATA_DIR, "challenges.yaml"))["challenges"]
-        challenge_paths.each do |path|
+        challenge_paths.each do |name, path|
           challenge = YAML.load_file(File.join(DATA_DIR, path))
           if challenge["docker_dir"]
-            execute %W[docker build -t "#{chalenge["name"]}" "#{File.join(DATA_DIR, challenge["docker_dir"])}"]
+            puts  *%W[docker build -t "#{name}" "#{File.join(DATA_DIR, challenge["docker_dir"])}"]
+            execute *%W[docker build -t "#{name}" "#{File.join(DATA_DIR, challenge["docker_dir"])}"]
           end 
         end
         

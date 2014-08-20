@@ -5,6 +5,6 @@ text: |
 
 password: aach5Aemigijepek
 points: 100
-docker_dir: "ritchie1/
+docker_dir: ritchie1/
 exec: >-
   {port: port}
