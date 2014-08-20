@@ -8,6 +8,6 @@ LOG_PATH  = "#{File.dirname(__FILE__)}/../logs"
 
 opts = { pid_path: "#{TMP_PATH}/hsctf.pid",
          log_path: "#{LOG_PATH}/hsctf.log"}
-#Dante.run('hsctf', opts) do |opts|
+Dante.run('hsctf', opts) do |opts|
   run CTF.new
-#end
+end
