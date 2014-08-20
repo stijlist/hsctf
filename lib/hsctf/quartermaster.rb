@@ -104,9 +104,7 @@ EOS
       challenge = game.challenges[challenge]
     end
     send_message(player, "**#{challenge['name']}**")
-    if @game.find_challenge_port(player)
-
-    end
+    port = @game.find_challenge_port(player, challenge["name"])
     if challenge['exec']
       interpolated_values = eval(challenge['exec'])
     else

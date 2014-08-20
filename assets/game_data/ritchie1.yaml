@@ -1,11 +1,11 @@
 ---
-name: alpha
+name: ritchie1
 text: |
   Our operative TODOTODOTOD. the service is forsure listening on ctf.hackerschool.com, port %{port}
 
 password: aach5Aemigijepek
 points: 100
-user_docker: |
+dockerfile: |
   FROM debian:unstable
 
   RUN apt-get update && apt-get install netcat-traditional -y
@@ -20,6 +20,7 @@ user_docker: |
   RUN mkdir -p "$DOORBOT_HOME" && chown -R user:user "$DOORBOT_HOME"
   USER user
 
-  CMD ["/opt/hackerschool/serve"]
+  #CMD ["/opt/hackerschool/serve"]
+run_cmd: "/bin/sh -c 'while true; do echo hello world; sleep 1; done'"
 exec: >-
   {port: port}

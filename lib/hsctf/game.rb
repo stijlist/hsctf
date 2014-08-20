@@ -34,7 +34,7 @@ class Game
                score: 0}
     player_id = @players.insert(player)
     @manager.spawn_instances(@challenges).each do |challenge_name, port|
-      @challenge_ports.insert(challenge: challenge_name, port: port, player_id: player_id)
+      @challenge_ports.insert(challenge_name: challenge_name, port: port, player_id: player_id)
     end
     player_id
   end
