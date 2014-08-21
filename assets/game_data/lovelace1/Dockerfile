@@ -3,6 +3,7 @@ RUN yes "notthepasswordyourelookingfor" | pure-pw useradd mycroft -u ftpuser -d 
 RUN pure-pw mkdb
 RUN echo "1000" > /etc/pure-ftpd/conf/MaxClientsNumber
 RUN echo "1000" > /etc/pure-ftpd/conf/MaxClientsPerIP
+echo "50000:50400" > /etc/pure-ftpd/conf/PassivePortRange
 
 
 COPY ./password /home/ftpusers/mycroft/
