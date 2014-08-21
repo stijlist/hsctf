@@ -13,7 +13,7 @@ text: >-
 points: 100
 password: KbNJnrEJ6u4b5hQy
 children: []
-exec: >-
+locals: >-
   {url: "http://google.com"}
 
 singleton_dockerfile: |

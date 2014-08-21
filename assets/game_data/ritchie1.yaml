@@ -1,12 +1,22 @@
 ---
 name: ritchie1
 text: |
-  Our operative TODOTODOTOD. the service is forsure listening on ctf.hackerschool.com, port %{port}
+  Our operative codenamed RITCHE has managed to retrieve the source
+  code and executable for Hacker Schmool's doorbot. You can find them
+  HERETODODODO.
+
+  RITCHIE has managed to reroute Hacker Schmool's firewall in order to
+  expose doorbot to the outside world. You can reach it at
+  ctf.hackerschool.com:%{port}.
+
+  Please retrieve Hacker Schmool's doorbot password.
+
+
 
 password: aach5Aemigijepek
 points: 100
 docker_dir: ritchie1/
 launch_docker_per_user: true
 port: 2017
-exec: >-
+locals: >-
   {port: port}

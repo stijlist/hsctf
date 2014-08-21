@@ -10,7 +10,7 @@ class Manager
   def instance_for(challenge) 
     instance_id = `docker run  -P -d #{challenge['name']}`.chomp
     port = `docker port #{instance_id} #{challenge['port']}`.chomp.split(/:/)[1]
-    #binding.pry
+    [instance_id, port]
   end
 
   # returns a list of challenge_name, port pairs

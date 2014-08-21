@@ -43,9 +43,9 @@ class Game
   end
 
   def find_challenge_port(player, challenge_name)
-    r = @dockers.where(player_id: player[:id], challenge_name: challenge_name)
+    r = @dockers.where(player_id: player[:id], challenge_name: challenge_name).first
     if r 
-      first[:port]
+      r[:port]
     else
       nil
     end
