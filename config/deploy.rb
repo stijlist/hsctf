@@ -89,6 +89,13 @@ namespace :db do
     end
   end
 
+  desc 'Reset Database'
+  task :reset do
+    on roles(:app), in: :sequence do
+      invoke("db:destroy")
+      invoke("db:create")
+    end
+  end
 end
 
 namespace :docker do
@@ -100,8 +107,8 @@ namespace :docker do
         execute *%W[docker rm "$(docker ps -a -q)"]
       end
     end
-  env
-  
+  end
+
   desc 'Build instances'
   task :build do
     on roles(:app) do
