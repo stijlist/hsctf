@@ -22,7 +22,7 @@ class Game
       @challenges[name] = challenge
       # HACK HACK HACK
       if challenge["launch_docker_once"]
-        puts "docker run -p 0.0.0.0:#{challenge['public_port']}:#{challenge['internal_port']} -t -d #{challenge['name']}"
+        `docker run -p 0.0.0.0:#{challenge['public_port']}:#{challenge['internal_port']} -t -d #{challenge['name']}`
       end
     end
    
