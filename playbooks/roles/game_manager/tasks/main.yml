@@ -19,3 +19,6 @@
 
 - name: Make app dir
   file: path=/home/deploy/app state=directory owner=deploy
+
+- name: disable ASLR
+  command: echo 0 > /proc/sys/kernel/randomize_va_space^C
