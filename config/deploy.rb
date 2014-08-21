@@ -104,7 +104,7 @@ namespace :docker do
   task :kill do
     on roles(:app) do
       within current_path do
-        execute *%W[docker rm "$(docker ps -a -q)"]
+        execute *%W[docker kill "$(docker ps -a -q)"]
       end
     end
   end
