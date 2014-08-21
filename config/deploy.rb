@@ -81,9 +81,27 @@ namespace :db do
       execute "cd #{current_path} && bundle exec ./bin/create_db"
     end
   end
+
+ desc 'Destroy Database'
+  task :destroy do
+    on roles(:app) do
+      execute "cd #{current_path} && rm db/game_database.db"
+    end
+  end
+
 end
 
 namespace :docker do
+
+  desc "Kill em all"
+  task :kill do
+    on roles(:app) do
+      within current_path do
+        execute *%W[docker rm "$(docker ps -a -q)"]
+      end
+    end
+  env
+  
   desc 'Build instances'
   task :build do
     on roles(:app) do
