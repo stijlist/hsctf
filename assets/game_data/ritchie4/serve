@@ -1,0 +1,6 @@
+#!/bin/bash
+DOORBOT_PORT=2017
+
+while true; do
+    nc -l -p ${DOORBOT_PORT} -c "./doorbot 2>&1"
+done

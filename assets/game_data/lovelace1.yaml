@@ -1,7 +1,7 @@
 ---
 name: lovelace1
 text: >-
-  One of our field operatives, codenamed Lovelace, has managed to
+  One of our field operatives, codenamed LOVELACE, has managed to
   plant a bug on a Hacker Schmool router. She's managed to exfiltrate
   some network traffic from Hacker Schmool, but we need your help
   analyzing it.
@@ -15,9 +15,7 @@ password: KbNJnrEJ6u4b5hQy
 children: []
 locals: >-
   {url: "http://google.com"}
-
-singleton_dockerfile: |
-  FROM debian:unstable
-  EXPOSE 21
-  RUN apt-get update && apt-get install -y vsftpd
-  ENV HOME /opt/files/
+docker_dir: lovelace1
+launch_docker_once: true
+public_port: 2121
+internal_port: 21

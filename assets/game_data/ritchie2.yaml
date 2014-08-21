@@ -1,0 +1,23 @@
+---
+name: ritchie2
+text: |
+  It seems that Hacker Schmool has updated their defenses after the
+  last attack! RITCHIE has once again extracted the code and binary
+  operating their doorbot.  You can find the
+  code [here](https://s3.amazonaws.com/hsctf/ritchie2/doorbot.c) and the binary
+  [here](https://s3.amazonaws.com/hsctf/ritchie2/doorbot).
+
+  RITCHIE has managed to reroute Hacker Schmool's firewall in order to
+  expose doorbot to the outside world. You can reach it at
+  ctf.hackerschool.com:%{port}.
+
+  Please retrieve Hacker Schmool's doorbot password.
+
+password: pieM9Raine7see0h
+points: 200
+docker_dir: ritchie2/
+launch_docker_per_user: true
+port: 2017
+locals: >-
+  {port: port}
+children: [ritchie2]

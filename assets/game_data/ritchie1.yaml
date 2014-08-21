@@ -1,17 +1,16 @@
 ---
 name: ritchie1
 text: |
-  Our operative codenamed RITCHE has managed to retrieve the source
-  code and executable for Hacker Schmool's doorbot. You can find them
-  HERETODODODO.
+  Our operative, codenamed RITCHE, has managed to retrieve the source
+  code and executable for Hacker Schmool's doorbot. You can find the
+  code [here](https://s3.amazonaws.com/hsctf/ritchie1/doorbot.c) and the binary
+  [here](https://s3.amazonaws.com/hsctf/ritchie1/doorbot).
 
   RITCHIE has managed to reroute Hacker Schmool's firewall in order to
   expose doorbot to the outside world. You can reach it at
   ctf.hackerschool.com:%{port}.
 
   Please retrieve Hacker Schmool's doorbot password.
-
-
 
 password: aach5Aemigijepek
 points: 100
@@ -20,3 +19,4 @@ launch_docker_per_user: true
 port: 2017
 locals: >-
   {port: port}
+children: [ritchie2]

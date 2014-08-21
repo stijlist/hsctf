@@ -1,0 +1,22 @@
+---
+name: ritchie4
+text: |
+  Hacker Schmool is tearing their hair out we're so good at hacking them!
+
+  Once again, they have improved their doorbot security. You can find the
+  code [here](https://s3.amazonaws.com/hsctf/ritchie4/doorbot.c) and the binary
+  [here](https://s3.amazonaws.com/hsctf/ritchie4/doorbot).
+
+  RITCHIE has managed to reroute Hacker Schmool's firewall in order to
+  expose doorbot to the outside world. You can reach it at
+  ctf.hackerschool.com:%{port}.
+
+  Please retrieve Hacker Schmool's doorbot password.
+
+password: Pu4shapoo5liethi
+points: 400
+docker_dir: ritchie4/
+launch_docker_per_user: true
+port: 2017
+locals: >-
+  {port: port}
