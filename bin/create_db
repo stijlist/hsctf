@@ -9,9 +9,10 @@ DB.create_table :players do
   Integer :score
 end
 
-DB.create_table :challenge_ports do
+DB.create_table :dockers do
   primary_key :id
   Integer :player_id
   String :challenge_name
+  String :instance_id
   String :port
 end

@@ -13,7 +13,7 @@ class Game
     @manager = docker_manager
     @DB = Sequel.sqlite(DB_PATH)
     @players = @DB[:players]
-    @challenge_ports = @DB[:challenge_ports]
+    @dockers = @DB[:dockers]
     challenge_info = YAML.load_file(File.join(DATA_DIR, "challenges.yaml"))
     @root_challenge = challenge_info['root']
     @challenges = {}
@@ -33,8 +33,11 @@ class Game
                available_challenges: [@root_challenge].to_yaml,
                score: 0}
     player_id = @players.insert(player)
-    @manager.spawn_instances(@challenges).each do |challenge_name, port|
-      @challenge_ports.insert(challenge_name: challenge_name, port: port, player_id: player_id)
+    @manager.spawn_instances(@challenges).each do |result|
+      if result
+        challenge_name, instance_id, port = result
+        @dockers.insert(challenge_name: challenge_name, port: port, instance_id: instance_id, player_id: player_id)
+      end
     end
     player_id
   end

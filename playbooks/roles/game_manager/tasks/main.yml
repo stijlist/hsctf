@@ -12,7 +12,7 @@
   command: gem install bundler
 
 - name: Create deploy user
-  user: name=deploy shell=/bin/bash
+  user: name=deploy shell=/bin/bash group=docker
 
 - name: Set up authorized keys
   authorized_key: user=deploy key="{{ lookup('file', '/Users/maxim/.ssh/id_rsa.pub') }}"
