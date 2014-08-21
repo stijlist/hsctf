@@ -22,6 +22,11 @@ class Game
       @challenges[name] = challenge
       # HACK HACK HACK
       if challenge["launch_docker_once"]
+        #lets kill it for good measure first
+        old_container = `docker ps |grep '0.0.0.0:2121' | awk '{ print $1 }'`
+        if !old_container.empty?
+          `docker kill #{old_container}`
+        end
         `docker run -p 0.0.0.0:#{challenge['public_port']}:#{challenge['internal_port']} -t -d #{challenge['name']}`
       end
     end
