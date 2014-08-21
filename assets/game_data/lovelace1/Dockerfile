@@ -11,5 +11,4 @@ RUN chown -R root:root /home/ftpusers/mycroft
 RUN chmod 755 /home/ftpusers/mycroft/
 RUN chmod 755 /home/ftpusers/mycroft/password
 
-CMD /usr/sbin/pure-ftpd -c 1000 -C 1000 -l puredb:/etc/pure-ftpd/pureftpd.pdb -x -E -j -R &\
-     /bin/bash
+CMD /usr/sbin/pure-ftpd -c 1000 -C 1000 -l puredb:/etc/pure-ftpd/pureftpd.pdb -x -E -j -R -N
