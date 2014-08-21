@@ -7,5 +7,6 @@ password: aach5Aemigijepek
 points: 100
 docker_dir: ritchie1/
 launch_docker_per_user: true
+port: 2017
 exec: >-
   {port: port}

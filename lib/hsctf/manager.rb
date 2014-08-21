@@ -8,9 +8,9 @@ class Manager
   # side-effects: starts docker file assoc'd with challenge
   # returns: port
   def instance_for(challenge) 
-    instance_id = `docker run  -P -d #{challenge['name']} "/bin/bash"`
-    port = `docker port #{instance_id} #{challenge['port']}` 
-    binding.pry
+    instance_id = `docker run  -P -d #{challenge['name']} "/bin/bash"`.chomp
+    port = `docker port #{instance_id} #{challenge['port']}`.chomp.split(/:/)[1]
+    #binding.pry
   end
 
   # returns a list of challenge_name, port pairs
