@@ -43,7 +43,12 @@ class Game
   end
 
   def find_challenge_port(player, challenge_name)
-    @challenge_ports.where(player_id: player[:id], challenge_name: challenge_name).first[:port]
+    r = @dockers.where(player_id: player[:id], challenge_name: challenge_name)
+    if r 
+      first[:port]
+    else
+      nil
+    end
   end
  
   def get_children(challenge)
