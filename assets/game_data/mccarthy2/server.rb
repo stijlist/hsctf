@@ -15,7 +15,7 @@ class Guestbook
   end
   def markdownify(string)
     string = filter_bad_chars(string)
-    `./Markdown.pl <<< #{string}`
+    `echo #{string} | ./Markdown.pl`
   end
 
   def comment(name, string)
