@@ -2,7 +2,7 @@
 require 'sequel'
 $LOAD_PATH.unshift("#{File.dirname(__FILE__)}/../lib")
 require 'hsctf'
-DB = Sequel.sqlite("#{File.dirname(__FILE__)}/../db/game_database.db")
+DB = Sequel.connect(ENV["RDS_CONNECTION_STRING"])
 DATA_DIR = "#{File.dirname(__FILE__)}/../assets/game_data/"
 
 unless challenge_name = ARGV[0]
