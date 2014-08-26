@@ -9,13 +9,13 @@ $mysqli = new mysqli("localhost", "root", "", "app");
 if ($_GET["mode"] == "get_secret") {
     $result = $mysqli->query("SELECT secret FROM secrets WHERE password = '" . $_GET["password"] . "'");
     while($row = $result->fetch_assoc()){ 
-        echo"Your secret is:" . $row["secret"];
+        echo"<p>Your secret is:" . $row["secret"] . "</p>";
     } 
     $result->close();
 }
 elseif ($_GET["mode"] == "put_secret") {
     $result = $mysqli->query("INSERT into secrets(password, secret) VALUES('" . $_GET["password"] . "', '" . $_GET["secret"] . "')");
-    echo "Your secret is safe with us";
+    echo "<p>Your secret is safe with us</p>";
     $result->close();
 }
 else {
