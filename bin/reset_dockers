@@ -5,7 +5,8 @@ require 'hsctf'
 DB = Sequel.connect(ENV["RDS_CONNECTION_STRING"])
 DATA_DIR = "#{File.dirname(__FILE__)}/../assets/game_data/"
 
-if challenge_name = ARGV[0]
+challenge_name = ARGV[0]
+if challenge_name != ""
   challenges = [[challenge_name, challenge_name + '.yaml']]
 else
   challenge_info = YAML.load_file(File.join(DATA_DIR, "challenges.yaml"))
