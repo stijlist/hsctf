@@ -2,16 +2,16 @@ require 'yaml'
 require 'sequel'
 require 'pry'
 
+
 class Game
   DATA_DIR = "#{File.dirname(__FILE__)}/../../assets/game_data/"
-  DB_PATH = "#{File.dirname(__FILE__)}/../../db/game_database.db"
   # challenges and players are both just data (dictionaries)
   # players keep references to their challenges
   # challenges know which challenges are their children
   attr_accessor :players, :challenges, :root_challenge
   def initialize(docker_manager)
     @manager = docker_manager
-    @DB = Sequel.sqlite(DB_PATH)
+    @DB = Sequel.connect(ENV['RDS_CONNECTION_STRING'])
     @players = @DB[:players]
     @dockers = @DB[:dockers]
     challenge_info = YAML.load_file(File.join(DATA_DIR, "challenges.yaml"))

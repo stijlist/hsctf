@@ -6,6 +6,7 @@ gem 'rspec'
 gem 'zulip'
 gem 'guard'
 gem 'sqlite3'
+gem 'pg'
 gem 'sequel'
 
 gem 'pry'
