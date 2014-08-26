@@ -8,6 +8,10 @@
     - ruby2.1
     - ruby2.1-dev
 
+- name: Install pg libraries
+  sudo: yes
+  apt: name=libpq-dev state=latest
+
 - name: Install bundler
   command: gem install bundler
 
