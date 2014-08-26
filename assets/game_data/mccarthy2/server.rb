@@ -3,9 +3,9 @@
 # guestbook
 # -> backtick to a markdown parser
 require 'date'
-require 'sinatra'
+require 'sinatra/base'
 
-set :bind, '0.0.0.0'
+
 
 
 class Guestbook
@@ -29,30 +29,26 @@ class Guestbook
   
 end
 
-guestbook = Guestbook.new
+class App < Sinatra::Base
+  configure do
+    @@guestbook = Guestbook.new
+  end
 
-get '/' do
-  erb :index, {locals: {comments: guestbook.comments}}
-end
-
-post '/guestbook/comments' do
-  guestbook.comment(params[:name], params[:comment])
-  redirect '/'
-end
-
-__END__
-
-@@ layout
+  template :layout do
+    """
 <html>
-    <head>
-        <title>My Hackathon Guestbook</title>
-    </head>
-    <body>
-        <%= yield %>
-    </body>
+<head>
+<title>My Hackathon Guestbook</title>
+</head>
+<body>
+<%= yield %>
+</body>
 </html>
+"""
+  end
 
-@@ index
+template :index do
+  """
 <h1>Hacker Schmool Guestbook</h1>
 What do you think of Hacker Schmool?
 <form action='/guestbook/comments' method='POST'>
@@ -68,3 +64,32 @@ What do you think of Hacker Schmool?
    <p>Name: <%= comment[:name] %></p>
    <p><%= comment[:comment] %> Time: <%= comment[:timestamp] %> 
 <% end %>
+"""
+end
+
+  get '/' do
+    erb :index, {locals: {comments: @@guestbook.comments}}
+  end
+
+  post '/guestbook/comments' do
+    @@guestbook.comment(params[:name], params[:comment])
+    redirect '/'
+  end
+
+  def self.run!
+    rack_handler_config = {}
+
+    ssl_options = {
+      :private_key_file => './ssl/server.key',
+      :cert_chain_file => './ssl/server.crt',
+      :verify_peer => false,
+    }
+
+    Rack::Handler::Thin.run(self, rack_handler_config) do |server|
+      server.ssl = true
+      server.ssl_options = ssl_options
+    end
+  end
+end
+
+App.run!

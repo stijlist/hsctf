@@ -1,5 +1,5 @@
 FROM litaio/ruby
-EXPOSE 4567
+EXPOSE 8080
 #RUN adduser --disabled-password --home=/app --gecos "" app
 RUN gem install bundler
 

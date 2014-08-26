@@ -58,7 +58,7 @@ class Quartermaster
             #TODO: update leaderboard, act accordingly
             if @leaders != @game.leaders
               @leaders = @game.leaders
-              @messager.broadcast_message('hsctf', 'Current Leaders', "Currently leading: #{@leaders.map{|l| l[:name] + ': ' l[:score]}.join(',').chomp(',')}")
+              @messager.broadcast_message('hsctf', 'Current Leaders', "Currently leading: #{@leaders.map{|l| l[:name] + ': ' + l[:score]}.join(',').chomp(',')}")
             end
 
           # if password is incorrect

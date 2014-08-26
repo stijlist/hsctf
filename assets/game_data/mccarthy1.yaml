@@ -1,10 +1,22 @@
 ---
 name: mccarthy1
 text: |
-  We've recieved inti
+  Our operative, codenamed MCCARTHY, has been busy infiltrating Hacker
+  Schmool's web services. He has discovered some kind of "secret
+  sharing" application used by Hacker Schmool facilitators to talk
+  trash about their students. He's managed to steal the source code
+  which you can find [here](https://s3.amazonaws.com/hsctf/mccarthy1/index.php).
 
-password: KbNJnrEJ6u4b5hQy
-children: []
+  MCCARTHY has also located where the application is running. You
+  can find it at http://ctf.hackerschool.com:%{port}.
+
+
+password: ip9ohquiNg2ahHaf
+children: [mccarthy2]
 points: 100
-docker_dir: mccarthy1./
+docker_dir: mccarthy1/
 launch_docker_per_user: true
+port: 80
+locals: >-
+  {port: port}
+children: [mccarthy2]

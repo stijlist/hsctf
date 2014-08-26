@@ -1,6 +1,6 @@
 ---
 name: lovelace1
-text: >-
+text: |
   One of our field operatives, codenamed LOVELACE, has managed to
   plant a bug on a Hacker Schmool router. She has exfiltrated
   some network traffic from Hacker Schmool, but we need your help
