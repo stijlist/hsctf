@@ -4,7 +4,7 @@ $LOAD_PATH.unshift("#{File.dirname(__FILE__)}/../lib")
 require 'hsctf'
 
 DB = Sequel.connect(ENV["RDS_CONNECTION_STRING"])
-DB.create_table :players do
+DB.create_table! :players do
   primary_key :id
   String :name
   String :email
@@ -12,7 +12,7 @@ DB.create_table :players do
   Integer :score
 end
 
-DB.create_table :dockers do
+DB.create_table! :dockers do
   primary_key :id
   Integer :player_id
   String :challenge_name
