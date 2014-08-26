@@ -6,19 +6,19 @@ DB = Sequel.connect(ENV["RDS_CONNECTION_STRING"])
 DATA_DIR = "#{File.dirname(__FILE__)}/../assets/game_data/"
 
 if challenge_name = ARGV[0]
-  challeges = [challenge_name]
+  challenges = [[challenge_name, challenge_name + '.yaml']]
 else
   challenge_info = YAML.load_file(File.join(DATA_DIR, "challenges.yaml"))
-  challenges = challege_info["challenges"]
+  challenges = challenge_info["challenges"]
 end
 manager = Manager.new
-challenges.each do |name|
-  challenge = YAML.load_file(File.join(DATA_DIR, name + ".yaml"))
+challenges.each do |name, path|
+  challenge = YAML.load_file(File.join(DATA_DIR, path))
   dockers = DB[:dockers]
 
-  dockers.where(challenge_name: challenge_name).each do |docker|
+  dockers.where(challenge_name: name).each do |docker|
     instance_id, port = manager.instance_for(challenge)
-    dockers.where(player_id: docker[:player_id], challenge_name: challenge_name).update(instance_id: instance_id, port: port)
+    dockers.where(player_id: docker[:player_id], challenge_name: name).update(instance_id: instance_id, port: port)
   end
 end
 
