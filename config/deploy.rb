@@ -109,8 +109,8 @@ namespace :docker do
     end
   end
 
-  desc 'Build instances'
-  task :build do
+  desc 'Build all instances'
+  task :build_all do
     on roles(:app) do
       within current_path do
         challenge_paths = YAML.load_file(File.join(DATA_DIR, "challenges.yaml"))["challenges"]
@@ -125,7 +125,23 @@ namespace :docker do
       end
     end
   end
+
+  desc "Build sepecific instance"
+  task :build, :challenge do |t, args|
+    on roles(:app) do
+      within current_path do
+        challenge = YAML.load_file(File.join(DATA_DIR, args[:challenge], ".yaml"))
+        if challenge["docker_dir"]
+          puts  *%W[docker build -t "#{name}" "#{File.join(DATA_DIR, challenge["docker_dir"])}"]
+          execute *%W[docker build -t "#{name}" "#{File.join(DATA_DIR, challenge["docker_dir"])}"]
+        else
+          puts "No docker file for #{challenge}!"
+        end 
+      end
+    end
+  end
 end
+
 namespace :message do
   desc 'Announcement'
   task :announce, :message do |t, args|
