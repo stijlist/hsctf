@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+require 'sequel'
+$LOAD_PATH.unshift("#{File.dirname(__FILE__)}/../lib")
+require 'hsctf'
+DB = Sequel.sqlite("#{File.dirname(__FILE__)}/../db/game_database.db")
+DATA_DIR = "#{File.dirname(__FILE__)}/../assets/game_data/"
+
+unless challenge_name = ARGV[0]
+  puts "Usage ./reset_dockers CHALLENGE_NAME"
+  exit 1
+end
+challenge = YAML.load_file(File.join(DATA_DIR, challenge_name + ".yaml"))
+dockers = DB[:dockers]
+manager = Manager.new
+dockers.where(challenge_name: challenge_name).each do |docker|
+  puts docker[:port]
+  instance_id, port = manager.instance_for(challenge)
+  puts instance_id
+  dockers.where(player_id: docker[:player_id], challenge_name: challenge_name).update(instance_id: instance_id, port: port)
+end
+
