@@ -117,11 +117,22 @@ namespace :docker do
         challenge_paths.each do |name, path|
           challenge = YAML.load_file(File.join(DATA_DIR, path))
           if challenge["docker_dir"]
-            puts  *%W[docker build -t "#{name}" "#{File.join(DATA_DIR, challenge["docker_dir"])}"]
             execute *%W[docker build -t "#{name}" "#{File.join(DATA_DIR, challenge["docker_dir"])}"]
           end 
         end
         
+      end
+    end
+  end
+
+desc 'Build specific instance'
+  task :build, :challenge_name do |t, args|
+    on roles(:app) do
+      within current_path do
+        challenge = YAML.load_file(File.join(DATA_DIR, args[:challenge_name] + ".yaml"))
+        if challenge["docker_dir"]
+          execute *%W[docker build -t "#{args[:challenge_name]}" "#{File.join(DATA_DIR, challenge["docker_dir"])}"]
+        end 
       end
     end
   end
