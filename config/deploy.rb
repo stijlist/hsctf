@@ -130,7 +130,7 @@ namespace :docker do
   task :build, :challenge do |t, args|
     on roles(:app) do
       within current_path do
-        challenge = YAML.load_file(File.join(DATA_DIR, args[:challenge], ".yaml"))
+        challenge = YAML.load_file(File.join(DATA_DIR, args[:challenge] + ".yaml"))
         if challenge["docker_dir"]
           puts  *%W[docker build -t "#{name}" "#{File.join(DATA_DIR, challenge["docker_dir"])}"]
           execute *%W[docker build -t "#{name}" "#{File.join(DATA_DIR, challenge["docker_dir"])}"]
