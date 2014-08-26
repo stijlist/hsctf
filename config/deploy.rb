@@ -130,7 +130,7 @@ namespace :docker do
   task :build, :challenge do |t, args|
     on roles(:app) do
       within current_path do
-        execute %w[bundle exec bin/reset_docker "#{args[:challenge]}"]
+        execute *%W[bundle exec bin/reset_dockers "#{args[:challenge]}"]
       end
     end
   end
