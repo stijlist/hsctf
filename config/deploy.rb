@@ -101,10 +101,10 @@ end
 namespace :docker do
 
   desc "Kill em all"
-  task :kill do
+  task :killall do
     on roles(:app) do
       within current_path do
-        execute *%W[docker kill "$(docker ps -a -q)"]
+        execute "docker kill `docker ps -a -q`"
       end
     end
   end
@@ -126,8 +126,8 @@ namespace :docker do
     end
   end
 
-  desc "Build sepecific instance"
-  task :build, :challenge do |t, args|
+  desc "Re-run sepecific instance"
+  task :run, :challenge do |t, args|
     on roles(:app) do
       within current_path do
         execute *%W[bundle exec bin/reset_dockers "#{args[:challenge]}"]
