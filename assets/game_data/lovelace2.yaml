@@ -1,0 +1,19 @@
+---
+name: lovelace2
+text: >-
+  Good job! 
+
+  LOVELACE has planted another bug for us, and we have some new
+  traffic for you to analyze
+  [here](https://s3.amazonaws.com/hsctf/lovelace2/lovelace2.pcap). We
+  know that Hacker Schmool has received an important email recently,
+  and we'd like to see its contents.
+
+  It is paramount that we don't compromise LOVELACE's cover, so if you
+  find yourself logging into a Hacker Schmool account, please don't
+  leave any trace of you activity. Especially don't change
+  settings/passwords!
+
+points: 200
+password: ahsoo8ohCh9Jei8j
+children: [lovelace2]

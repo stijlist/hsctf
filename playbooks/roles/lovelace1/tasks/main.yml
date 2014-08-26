@@ -1,0 +1,33 @@
+- name: Install ftp server
+  apt: name={{ item }} state=latest
+  with_items:
+    - pure-ftpd
+    - pureadmin
+- name: Add pureftpd group
+  group: name=ftpgroup
+
+- name: Add pureftpd user
+  user: name=ftpuser group=ftpgroup shell=/dev/null
+
+- name: Make ftpd dir
+  file: path={{ item }} state=directory owner=ubuntu group=ftpgroup
+  with_items:
+    - /home/ftpusers
+    - /home/ftpusers/mycroft
+
+#FML I can't get ansible to do this
+# - name: Setup ftpd internal user
+#  sudo: true
+#  command: "{{ item }}"
+#  ignore_errors: yes
+#  with_items:
+#    - echo "notthepasswordyourelookingfor" > /tmp/pass
+#    - echo "notthepasswordyourelookingfor" >> /tmp/pass
+#    - sudo pure-pw useradd mycroft -u ftpuser -d /home/ftpusers/mycroft  -m < /tmp/pass
+#    - sudo pure-pw mkdb
+
+- name: Copy password file
+  copy: src=../../../../assets/game_data/lovelace1/password dest=/home/ftpusers/mycroft/therealpassword owner=ubuntu group=ubuntu mode=0755
+
+- name: Copy the prince
+  copy: src=../../../../assets/game_data/lovelace1/the_prince.txt dest=/home/ftpusers/mycroft/the_prince.txt owner=ubuntu group=ubuntu mode=0755

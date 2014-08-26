@@ -2,20 +2,15 @@
 name: lovelace1
 text: >-
   One of our field operatives, codenamed LOVELACE, has managed to
-  plant a bug on a Hacker Schmool router. She's managed to exfiltrate
+  plant a bug on a Hacker Schmool router. She has exfiltrated
   some network traffic from Hacker Schmool, but we need your help
   analyzing it.
 
-  We're looking for the password to Hacker Schmool's main FTP
-  server. You can find the files our operative has updaloaded here:
-  %{url}.
+  You can find the PCAP file LOVELACE found
+  [here](https://s3.amazonaws.com/hsctf/lovelace1/lovecraft1.pcap).
+  You'll need to get Wireshark to open it. We are looking for some
+  kind of password.
 
 points: 100
 password: KbNJnrEJ6u4b5hQy
-children: []
-locals: >-
-  {url: "http://google.com"}
-docker_dir: lovelace1
-launch_docker_once: true
-public_port: 2121
-internal_port: 21
+children: [lovelace2]

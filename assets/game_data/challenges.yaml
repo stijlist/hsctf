@@ -2,6 +2,7 @@ root: alpha
 challenges:
   alpha: alpha.yaml
   lovelace1: lovelace1.yaml
+  lovelace2: lovelace2.yaml
   mccarthy1: mccarthy1.yaml
   ritchie1: ritchie1.yaml
   ritchie2: ritchie2.yaml
