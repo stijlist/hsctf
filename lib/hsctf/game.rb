@@ -91,9 +91,7 @@ class Game
       challenge = @challenges[challenge_name]
       
       if challenge
-        if challenge['password_eval']
-          return eval(challenge['password_eval'])
-        elsif challenge['password'] == answer
+        if (challenge['password_eval'] && eval(challenge['password_eval'])) || (challenge['password'] && challenge['password'] == answer)
           available_challenges.delete(challenge_name)
           available_challenges.concat(get_children(challenge))
           @players.where(id: player[:id]).update(available_challenges: available_challenges.to_yaml, score: player[:score] + challenge['points'])
