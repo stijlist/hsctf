@@ -3,8 +3,10 @@ challenges:
   alpha: alpha.yaml
   lovelace1: lovelace1.yaml
   lovelace2: lovelace2.yaml
+  lovelace3: lovelace3.yaml
   mccarthy1: mccarthy1.yaml
   mccarthy2: mccarthy2.yaml
+  mccarthy3: mccarthy3.yaml
   ritchie1: ritchie1.yaml
   ritchie2: ritchie2.yaml
   ritchie3: ritchie3.yaml

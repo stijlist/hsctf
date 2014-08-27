@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<!-- saved from url=(0029)https://www.hackerschool.com/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Hacker Schmool</title>
+<meta charset="utf-8">
+<script>
+          function setInnerText(element, value) {
+            if (element.innerText) {
+              element.innerText = value;
+            } else {
+              element.textContent = value;
+            }
+          }
+
+          function includeGadget(url) {
+            var scriptEl = document.createElement('script');
+
+            // This will totally prevent us from loading evil URLs!
+            if (url.match(/^https?:\/\//)) {
+              setInnerText(document.getElementById("gadget-name"),
+                "Sorry, cannot load a URL containing \"http\".");
+              return;
+            }
+
+            // Load this awesome gadget
+            scriptEl.src = url;
+
+            // Show log messages
+            scriptEl.onload = function() {
+              console.log("Loaded gadget from " + url);
+            }
+            scriptEl.onerror = function() {
+              console.log("Couldn't load gadget from " + url);
+            }
+
+            document.head.appendChild(scriptEl);
+          }
+
+          // Take the value after # and use it as the gadget filename.
+          function getGadgetPath() {
+            return window.location.hash.substr(1) || "/static/gadget.js";
+          }
+
+          includeGadget(getGadgetPath());
+
+          </script>
+<script type="text/javascript">window.NREUM||(NREUM={}),__nr_require=function(t,n,e){function r(e){if(!n[e]){var o=n[e]={exports:{}};t[e][0].call(o.exports,function(n){var o=t[e][1][n];return r(o?o:n)},o,o.exports)}return n[e].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<e.length;o++)r(e[o]);return r}({D5DuLP:[function(t,n){function e(t,n){var e=r[t];return e?e.apply(this,n):(o[t]||(o[t]=[]),void o[t].push(n))}var r={},o={};n.exports=e,e.queues=o,e.handlers=r},{}],handle:[function(t,n){n.exports=t("D5DuLP")},{}],G9z0Bl:[function(t,n){function e(){var t=l.info=NREUM.info;if(t&&t.agent&&t.licenseKey&&t.applicationID&&p&&p.body){l.proto="https"===f.split(":")[0]||t.sslForHttp?"https://":"http://",i("mark",["onload",a()]);var n=p.createElement("script");n.src=l.proto+t.agent,p.body.appendChild(n)}}function r(){"complete"===p.readyState&&o()}function o(){i("mark",["domContent",a()])}function a(){return(new Date).getTime()}var i=t("handle"),u=window,p=u.document,s="addEventListener",c="attachEvent",f=(""+location).split("?")[0],l=n.exports={offset:a(),origin:f,features:[]};p[s]?(p[s]("DOMContentLoaded",o,!1),u[s]("load",e,!1)):(p[c]("onreadystatechange",r),u[c]("onload",e)),i("mark",["firstbyte",a()])},{handle:"D5DuLP"}],loader:[function(t,n){n.exports=t("G9z0Bl")},{}]},{},["G9z0Bl"]);</script>
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<link href="https://www.hackerschool.com/blog.rss" rel="alternate" title="Hacker Schmool Blog" type="application/rss+xml">
+<link href="https://d29xw0ra2h4o4u.cloudfront.net/assets/zurb-abd251cf0c372191c39e45b3d6f98690.css" media="screen" rel="stylesheet">
+<!--[if lt IE 8]>
+<link href="https://d29xw0ra2h4o4u.cloudfront.net/assets/ie-518b224cd3496cfb3fd86375682a9ac7.css" media="screen, projection" rel="stylesheet" />
+<![endif]-->
+<!--[if lt IE 9]>
+<script src='//html5shim.googlecode.com/svn/trunk/html5.js'></script>
+<![endif]-->
+<meta content="authenticity_token" name="csrf-param">
+<meta content="n8G59wVYsmyAkKNOSOtimm3KZLZYnm89qXlfG9RXHnYbB8eHIve4vawTqmLuJDo5cQIlwHujo4CMwQTojl2vFg==" name="csrf-token">
+<meta class="foundation-mq-topbar"></head>
+<body>
+<nav class="top-bar" data-topbar="">
+<ul class="title-area">
+<li class="toggle-topbar menu-icon">
+<a href="https://www.hackerschool.com/#"></a>
+</li>
+<li class="name" id="logo">
+<a href="./Hacker Scmool_files/Hacker Schmool.html"><strong>Hacker</strong> Schmool
+</a></li>
+</ul>
+
+<section class="top-bar-section" id="navigation">
+<ul class="right">
+<li>
+<a href="https://www.hackerschool.com/about">About</a></li>
+<li>
+<a href="https://www.hackerschool.com/residents">Residents</a></li>
+<li>
+<a href="https://www.hackerschool.com/faq">FAQ</a></li>
+<li>
+<a href="https://www.hackerschool.com/manual">Manual</a></li>
+<li>
+<a href="https://www.hackerschool.com/blog">Blog</a></li>
+<li class="has-form"><a class="small button" href="https://www.hackerschool.com/apply?r=topnav">Apply</a></li>
+<li class="last">
+<a href="https://www.hackerschool.com/login">Log in</a></li>
+</ul>
+</section></nav>
+<div class="row">
+<div class="center"><img alt="Logo no text" src="./static/logo-no-text-a5224cb522a6e2a67094e6cddf499f73.png"></div>
+<div id="error-state">
+</div>
+<div class="wide-layout" id="content">
+<div id="callout">
+<h1>Hacker Schmool is a retreat for programmers.</h1>
+<p>
+Want to spend three months coding and learning in New York with smart, friendly, and intellectually curious people? <a href="https://www.hackerschool.com/about">Read on</a>.
+</p>
+<a class="small button" href="https://www.hackerschool.com/apply?r=homepage">APPLY NOW</a>
+</div>
+<div id="banner">
+<p>New blog post: <a href="https://www.hackerschool.com/blog/38-subtle-isms-at-hacker-school">Subtle -isms at Hacker Schmool</a></p>
+</div>
+<div id="tenets">
+<h2>Hacker Schmool is...</h2>
+<ul>
+<li>
+<h3>Self-directed</h3>
+<p>We value intrinsic motivation and self-direction, and believe people learn best when they're free to explore their passions and interests.</p>
+</li>
+<li>
+<h3>Accessible</h3>
+<p><strong>We're free for all students.</strong> We also offer need-based grants for living expenses for female programmers.</p>
+</li>
+<li>
+<h3>Stimulating</h3>
+<p>We look for smart, friendly, self-directed, and intellectually curious people who enjoy programming and want to get dramatically better.</p>
+</li>
+<li>
+<h3>Exceptional</h3>
+<p>We have exceptional residents including Peter Norvig, Jessica McKellar, Yaron Minsky, David Nolen, Peter Seibel, Nada Amin, and more.</p>
+</li>
+<li>
+<h3>Thoughtful</h3>
+<p>The atmosphere here is friendly and intellectual. We have <strong>a gender-balanced environment</strong>, and lightweight social rules.</p>
+</li>
+<li>
+<h3>Supportive</h3>
+<p>We have a tight-knit community of nearly <strong>300 alumni across 24 countries.</strong> Our motto is "never graduate."</p>
+</li>
+<li>
+<h3>Project-based</h3>
+<p>Hacker Schmoolers have made significant contributions to dozens of open source projects and started many of their own.</p>
+</li>
+<li>
+<h3>Connected</h3>
+<p>We make money by helping great companies hire our alumni. There's no obligation to take a job if you don't want one.</p>
+</li>
+</ul>
+</div>
+<form action="http://linkedlistnyc.us2.list-manage.com/subscribe/post?u=193b767bbb3b0eb0d949d5924&id=c8d3ac8bbf" method="post" name="mc-embedded-subscribe-form" target="_blank">
+<div class="email-signup">
+<input class="text" id="mce-EMAIL" name="EMAIL" placeholder="Email" type="email">
+</div>
+<div id="subscribe">
+<input class="button prefix" name="subscribe" type="submit" value="Subscribe">
+</div>
+</form>
+
+<div id="instagram">
+<ul>
+<li><img alt="Instagram 14" src="./static/instagram_14-c69ddc38ff6523e979fd2159006d8eee.jpg"></li>
+<li><img alt="Instagram 02" src="./static/instagram_02-f957b9b5d76c27a3a70a807b2d54e361.jpg"></li>
+<li><img alt="Instagram 16" src="./static/instagram_16-002fbd7fb3c7c9a615c76e3e1b5d6829.jpg"></li>
+<li><img alt="Instagram 22" src="./static/instagram_22-78daa35f62be03ac6e421ebcf2155cb9.jpg"></li>
+<li><img alt="Instagram 17" src="./static/instagram_17-39473db8be04759bfd11af1e0652e1d8.jpg"></li>
+<li><img alt="Instagram 06" src="./static/instagram_06-e20b290caa4c3831d9c0a7352585f72d.jpg"></li>
+<li><img alt="Instagram 08" src="./static/instagram_08-813fe6d292342c95c7ba3b12cc6db4d3.jpg"></li>
+<li><img alt="Instagram 20" src="./static/instagram_20-0d78ccccc800b80e00b1468588ee35ce.jpg"></li>
+</ul>
+</div>
+<div id="sponsors">
+<h2>Fall 2013 grant sponsors:</h2>
+<hr>
+<ul>
+<li><a href="https://www.dropbox.com/"><img alt="Sponsor dropbox" src="./static/sponsor-dropbox-cb555ed51e2f2a16104cf6ad4649c1a2.png"></a></li>
+<li><a href="https://www.etsy.com/"><img alt="Etsy w110" src="./static/etsy_w110-9535f55aaebaa1b59d869a76cfbbd12a.png"></a></li>
+<li><a href="http://www.janestreet.com/"><img alt="Jane street w110" src="./static/jane_street_w110-6c8cad4a37d00b89f6588800630dd77d.png"></a></li>
+<li><a href="http://www.tapad.com/"><img alt="Tapad w110" src="./static/tapad_w110-4a9f6513b906cde668418656c1d930d9.png"></a></li>
+<li><a href="https://www.tumblr.com/"><img alt="Tumblr w110" src="./static/tumblr_w110-ba6d46aeb1ed80d0aacbf1fcce6253e0.png"></a></li>
+</ul>
+</div>
+<div id="testimonials">
+<h2>Testimonials</h2>
+<hr>
+<blockquote>
+<img alt="Oskar thoren 75" src="./static/oskar_thoren_75-d9c55a8be5b42d1ca4e0fc2235238dd5.jpg">
+<strong>Go. That's my one word summary of Hacker Schmool.</strong> If you like programming and problem solving there are few places you could go and learn as much in such a short period of time. Three months of freeform learning with a diverse group of smart and curious people and just the right amount of social pressure to finish projects you start.
+<div class="testimonial-name">— Oskar, Summer 2012 | Stockholm, Sweden</div>
+</blockquote>
+<blockquote>
+<img alt="Danielle e sucher 75" src="./static/danielle_e_sucher_75-e2b441916bffef2381ad92877048650b.jpg">
+Direct quote from an interviewer who looked at my resume shortly after I finished Hacker Schmool: <strong>‘You’ve done more in the past 3 months than I’ve done in the past 3 YEARS!’</strong>
+<div class="testimonial-name">— Danielle, Winter 2012 | Brooklyn, NY</div>
+</blockquote>
+<blockquote>
+<img alt="Leah hanson 75" src="./static/leah_hanson_75-5c0bb8d7e796015bfd7cd0c0750ac0e9.jpg">
+Hacker Schmool gave me a lot more confidence in my programming abilities. I wouldn't have even considered proposing a conference talk before Hacker Schmool, but now I've spoken at LambdaJam, Strange Loop, and Strata this year! I had previously believed that contributing to open source was just too hard for me to do (big unfamiliar code base with no help!), but now I don't hesitate to make pull requests when I find minor bugs in software I use.
+The most important thing to me about attending is that <strong>you become part of this network of supportive, technical people.</strong> They connect you to interesting opportunities, help you when you ask, and support you when you're stretching to do something new.
+<div class="testimonial-name">— Leah, Winter 2013 | Baltimore, MD</div>
+</blockquote>
+<blockquote>
+<img alt="Alexandre beaulne 75" src="./static/alexandre_beaulne_75-202d3d99372ffba1a730e394bb8c5649.jpg">
+<strong>Hacker Schmool was the best educational experience of my life.</strong> After pursuing traditional college and grad school, it was a breath of fresh air to find myself in an environment carefully gardened to maximize genuine learning - not GPAs, rankings or career prospects. I could fully focus on my craft, surrounded by terrific classmates and mentors, in a terrific city.
+<div class="testimonial-name">— Alexandre, Winter 2013 | Hong Kong</div>
+</blockquote>
+</div>
+
+</div>
+</div>
+<footer>
+<ul class="inline-list">
+<li><a href="index.html">Home</a></li>
+<li><a href="https://www.hackerschool.com/about">About</a></li>
+<li><a href="https://www.hackerschool.com/residents">Residents</a></li>
+<li><a href="https://www.hackerschool.com/faq">FAQ</a></li>
+<li><a href="https://www.hackerschool.com/manual">Manual</a></li>
+<li><a href="https://www.hackerschool.com/blog">Blog</a></li>
+<li><a href="https://www.hackerschool.com/apply?r=footer">Apply</a></li>
+</ul>
+<div class="ny">
+Hacker Schmool
+<i class="fi-heart red"></i>
+NY
+</div>
+</footer>

@@ -6,7 +6,7 @@ if (system.args.length === 1) {
   phantom.exit();
 }
 
-var host = 'http://localhost:4567/';
+var host = 'http://localhost:8000/';
 var path = system.args[1];
 
 var pass = 'pass';
@@ -17,11 +17,11 @@ page.open(host + path, function (status) {
   if (status === 'fail') { console.log(fail); phantom.exit(); return; }
 
   var txt = page.evaluate(function () {
-    var nameEl = document.getElementById('gadget-name');
-    return nameEl ? nameEl.textContent : '';
+    var nameEl = document.getElementById('logo');
+    return nameEl ? nameEl.innerHTML : '';
   });
 
-  console.log(txt === 'Max' ? pass : fail);
+    console.log(txt === 'Hacker School!' ? pass : fail);
 
   phantom.exit();
 
