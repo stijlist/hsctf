@@ -20,4 +20,4 @@ launch_docker_per_user: true
 port: 2017
 locals: >-
   {port: port}
-children: [ritchie2]
+children: [ritchie3]
