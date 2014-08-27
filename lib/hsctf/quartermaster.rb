@@ -33,6 +33,7 @@ class Quartermaster
       available_challenges = player[:available_challenges]
       case text.split.first.downcase
       when /solved?/
+        @leaders = @game.leaders
         # if user is trying to solve something 
         challenge_name = text.split[1]
         # if challenge is available for a player
