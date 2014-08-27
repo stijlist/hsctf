@@ -19,7 +19,12 @@ class Quartermaster
       if text.start_with?('register')
         player_id = @game.register(name, email)
         player = @game.find_player_by(id: player_id)
+        available_challenges = player[:available_challenges]
         send_message(player, "You've successfully registered!")
+        available_challenges.each do |c|
+          send_challenge_description(c, player)
+        end
+        
       else
         send_message({email: email}, "You haven't signed up! Send me a pm with 'register' to sign up.")
       end
