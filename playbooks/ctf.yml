@@ -2,8 +2,20 @@
 - hosts: ctf
   remote_user: ubuntu
   sudo: yes
-  
+  pre_tasks:
+    - name: making sure virtualenv is installed
+      apt: pkg=python-virtualenv
+      sudo: yes
+
   roles:
     - docker
     - game_manager
     - lovelace1
+    - role: jdauphant.nginx
+      nginx_http_params:
+        - sendfile "on"
+        - access_log "/var/log/nginx/access.log"
+      nginx_sites:
+        mccarthy3:
+          - listen 8080
+          - root /home/deploy/app/current/assets/game_data/mccarthy3/serve/
