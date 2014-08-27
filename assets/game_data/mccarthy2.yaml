@@ -11,11 +11,10 @@ text: |
   We also think it's strange that the only app that Hacker Schmool runs over https is a guestbook...
 
 password: ahFe8ahJ2ahnae9n
-children: [mccarthy3]
 points: 200
 docker_dir: mccarthy2/
 launch_docker_per_user: true
 port: 8080
 locals: >-
   {port: port}
-children: [mccarthy2]
+children: [mccarthy3]
