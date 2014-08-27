@@ -110,7 +110,7 @@ end
 
 class Leaders
   def self.given(players)
-    sorted_by_score = players.sort_by{|p| p[:score]}.reverse
+    sorted_by_score = players.all.sort_by{|p| p[:score]}.reverse
     highest_score = sorted_by_score.first[:score]
     sorted_by_score.take_while {|p| p[:score] == highest_score }
   end
