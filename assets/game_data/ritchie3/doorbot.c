@@ -18,6 +18,7 @@ int check_password() {
 
 void open_door() {
   printf("Opening Hacker School Door. You got in with the password: %s\n", password);
+  fflush(stdout);
 }
 
 int main(int argc, char **argv) {

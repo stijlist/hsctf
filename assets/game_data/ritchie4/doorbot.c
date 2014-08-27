@@ -22,6 +22,7 @@ int check_password() {
 
 void open_door() {
   printf("Opening Hacker School Door\n");
+  fflush(stdout);
 }
 
 int main(int argc, char **argv) {
