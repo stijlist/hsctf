@@ -1,0 +1,21 @@
+---
+name: mccarthy2
+text: |
+  MCCARTHY has found the source code of another Hacker Schmool app, a
+  guestbook appplication. He has and uploaded it
+  [here](https://s3.amazonaws.com/hsctf/mccarthy2/server.rb).
+
+  MCCARTHY has also located where the application is running. You can
+  find it at https://ctf.hackerschool.com:%{port}.
+
+  We also think it's strange that the only app that Hacker Schmool runs over https is a guestbook...
+
+password_eval: |
+  `phantomjs #{DATA_DIR}/mccarthy3/phantom.js #{answer.partition('/').last}` == "pass"
+points: 200
+docker_dir: mccarthy2/
+launch_docker_per_user: true
+port: 8080
+locals: >-
+  {port: port}
+children: [mccarthy3]

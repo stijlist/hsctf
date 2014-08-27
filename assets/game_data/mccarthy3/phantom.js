@@ -1,12 +1,12 @@
 var page = require('webpage').create(),
-  system = require('system');
+    system = require('system');
 
 if (system.args.length === 1) {
-  console.log('Usage: phantom.js <path>');
-  phantom.exit();
+    console.log('Usage: phantom.js <path>');
+    phantom.exit();
 }
 
-var host = 'http://localhost:8000/';
+var host = 'http://ctf.hackerschool.com:8080/';
 var path = system.args[1];
 
 var pass = 'pass';
@@ -14,15 +14,14 @@ var fail = 'fail';
 
 page.open(host + path, function (status) {
 
-  if (status === 'fail') { console.log(fail); phantom.exit(); return; }
+    if (status === 'fail') { console.log(fail); phantom.exit(); return; }
 
-  var txt = page.evaluate(function () {
-    var nameEl = document.getElementById('logo');
-    return nameEl ? nameEl.innerHTML : '';
-  });
-
+    var txt = page.evaluate(function () {
+        var nameEl = document.getElementById('logo');
+        return nameEl ? nameEl.innerHTML : '';
+    });
     console.log(txt === 'Hacker School!' ? pass : fail);
 
-  phantom.exit();
+    phantom.exit();
 
 });
