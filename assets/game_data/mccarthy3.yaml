@@ -11,6 +11,6 @@ text: |
   with the words "Hacker School!".
 
 password_eval: |
-  `phantomjs #{DATA_DIR}/mccarthy3/phantom.js #{answer.sub(/\Ahttp:\/\//,'').partition('/').last}` == "pass"
+  `phantomjs #{DATA_DIR}/mccarthy3/phantom.js "#{answer.sub(/\Ahttp:\/\//,'').partition('/').last}"` == "pass"
 points: 300
 children: []
