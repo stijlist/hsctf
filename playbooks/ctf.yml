@@ -11,6 +11,7 @@
     - docker
     - game_manager
     - lovelace1
+    - nicolai86.phantomjs
     - role: jdauphant.nginx
       nginx_http_params:
         - sendfile "on"
