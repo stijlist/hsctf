@@ -1,0 +1,15 @@
+---
+name: lovelace3
+text: |
+  One of our agents has been compromised! We have lost contact with
+  him, but LOVELACE has managed to retrieve the last network traffic
+  coming from his computer. Please see what you can make of it. It's
+  available
+  [here](https://s3.amazonaws.com/hsctf/lovelace3/lovelace3.pcap).
+
+  We believe the last place this agent accessed was the Hacker Schmool guestbook.
+
+  
+points: 300
+password: eipuiFogoo7Aiyah
+children: []
